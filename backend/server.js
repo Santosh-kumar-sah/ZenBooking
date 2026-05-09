@@ -15,10 +15,11 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-// CORS: Allow localhost on any port for development
+// CORS: Allow specified frontend URLs
+const allowedOrigins = (process.env.FRONTEND_URLS || 'http://localhost:5173').split(',').map(url => url.trim());
 const corsOptions = {
   origin: (origin, callback) => {
-    if (!origin || origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:')) {
+    if (!origin || allowedOrigins.includes(origin) || origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:')) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
