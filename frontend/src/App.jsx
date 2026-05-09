@@ -39,4 +39,4 @@ const App = () => {
   );
 };
 
-export { App };
+export { App };// Note: The above code is the main application component that sets up routing for the frontend. It includes protected routes for the dashboard and public routes for booking. The backend/server.js file has been updated to include a root route that returns the API status, and CORS configuration has been enhanced to allow multiple specified frontend URLs.
