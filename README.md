@@ -1,44 +1,100 @@
-# SalonBook
+# ZenBooking
 
-SalonBook is a MERN-based appointment booking platform with AI-assisted booking, owner dashboards, and a public customer booking experience.
+**AI-Powered Appointment Booking Platform for Salons & Service Businesses**
 
-## What This App Does
+ZenBooking is a modern MERN-based appointment booking platform that combines AI-assisted booking, intuitive owner dashboards, and a seamless public customer experience. Let AI handle your bookings while you focus on your business.
 
-- Owners register, log in, and manage their booking dashboard.
-- Customers do not register.
-- Customers visit a public booking page, choose a slot, and submit their name plus either phone number or email.
-- The backend creates the booking, generates reminders, and sends confirmation notifications.
-- AI helps parse natural-language booking requests and can create bookings automatically.
+## 🚀 Live Demo
 
-## Project Structure
+- **Frontend**: [https://v-booking-nine.vercel.app/](https://v-booking-nine.vercel.app/)
+- **Backend API**: [https://vbooking.onrender.com/](https://vbooking.onrender.com/)
 
-- `backend/` - Express API, MongoDB models, AI services, booking services, and notification logic.
-- `frontend/` - Vite + React app for public booking and owner dashboard UI.
+## ✨ Key Features
 
-## Key Flows
+- **AI Booking Assistant** - Customers book in seconds using natural language
+- **Smart Slot Management** - Auto-manages schedules and blocks unavailable times
+- **Owner Dashboard** - Real-time booking management and analytics
+- **Customer Notifications** - Automated email confirmations and reminders
+- **AI Insights** - Understand booking patterns and peak hours
+- **Public Booking Page** - No registration required for customers
+- **Mobile Responsive** - Works beautifully on all devices
+- **Zero Setup** - Go live in minutes
 
-### Owner flow
+## 📋 What This App Does
 
-1. Register and log in.
-2. Access `/dashboard`.
-3. Manage slots, bookings, and insights.
-4. Copy the public booking link for customers.
+- **Owners** register, log in, and manage their booking dashboard
+- **Customers** don't register - they visit the public booking page and book in seconds
+- **Customers** pick a date/slot and enter their name + phone/email
+- **Backend** creates bookings, generates reminders, and sends confirmations
+- **AI** parses natural-language booking requests and auto-creates bookings when slots are available
 
-### Customer flow
+## 📁 Project Structure
 
-1. Open the public booking link `/:ownerId`.
-2. Pick a date and slot.
-3. Enter name and either phone number or email.
-4. Receive booking confirmation.
+- `backend/` - Express API, MongoDB models, AI services (Groq), booking and notification logic
+- `frontend/` - Vite + React app with owner dashboard and public booking UI
 
-### AI booking flow
+## 🎯 User Flows
 
-1. Customer types a natural-language request.
-2. AI extracts booking intent and details.
-3. Backend creates the booking if a slot is available.
-4. Confirmation notifications are sent.
+### Owner Flow
+1. Register and create account
+2. Access `/dashboard`
+3. Manage slots, view bookings, and track insights
+4. Copy public booking link to share with customers via Instagram, WhatsApp, etc.
 
-## Setup
+### Customer Flow
+1. Open shared public booking link (`/:ownerId`)
+2. Browse available dates and time slots
+3. Enter name and contact (phone/email)
+4. Receive instant booking confirmation via email
+
+### AI Booking Flow
+1. Customer types natural-language request in chat
+2. AI extracts booking intent and details
+3. Backend validates slot availability
+4. Booking is created automatically
+5. Confirmation notifications sent to both parties
+
+## 🛠️ Tech Stack
+
+### Frontend
+- **Framework**: React 18 + Vite
+- **Styling**: Tailwind CSS + PostCSS
+- **State Management**: Zustand
+- **HTTP Client**: Axios
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Routing**: React Router v6
+- **Deployment**: Vercel
+
+### Backend
+- **Runtime**: Node.js
+- **Framework**: Express.js
+- **Database**: MongoDB
+- **Authentication**: JWT (Access + Refresh tokens)
+- **AI**: Groq API (LLaMA models)
+- **Email**: Nodemailer
+- **SMS**: Twilio (optional)
+- **Jobs**: Node Cron
+- **Deployment**: Render
+
+## 📸 Screenshots
+
+### Landing Page
+![ZenBooking Landing Page](https://via.placeholder.com/800x600?text=Landing+Page)
+
+### Owner Dashboard
+![Owner Dashboard](https://via.placeholder.com/800x600?text=Owner+Dashboard)
+
+### Bookings Management
+![Bookings Page](https://via.placeholder.com/800x600?text=Bookings+Page)
+
+### Public Booking Page
+![Public Booking](https://via.placeholder.com/800x600?text=Public+Booking)
+
+### AI Chat Widget
+![AI Chat](https://via.placeholder.com/800x600?text=AI+Chat+Widget)
+
+## ⚙️ Setup & Installation
 
 ### Backend
 
@@ -46,6 +102,41 @@ SalonBook is a MERN-based appointment booking platform with AI-assisted booking,
 cd backend
 npm install
 npm run dev
+```
+
+**Environment Variables** (`.env`):
+
+```env
+# Server Configuration
+PORT=8000
+
+# Database
+MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/database
+
+# JWT Secrets
+JWT_SECRET=your_jwt_secret_key_here
+JWT_REFRESH_SECRET=your_refresh_secret_key_here
+
+# Email Configuration
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASS=your_app_password
+
+# AI Configuration
+GROQ_API_KEY=your_groq_api_key
+
+# Frontend URLs (CORS)
+FRONTEND_URLS=http://localhost:5173,https://v-booking-nine.vercel.app
+
+# Optional SMS Configuration
+# TWILIO_SID=your_twilio_sid
+# TWILIO_TOKEN=your_twilio_token
+# TWILIO_FROM=+1234567890
+
+# Testing & Notifications
+NOTIFY_TEST_MODE=0
+EMAIL_RETRY_ATTEMPTS=3
 ```
 
 ### Frontend
@@ -56,56 +147,88 @@ npm install
 npm run dev
 ```
 
-## Environment Variables
-
-### `backend/.env`
+**Environment Variables** (`.env`):
 
 ```env
-PORT=8000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-JWT_REFRESH_SECRET=your_refresh_secret
-EMAIL_HOST=smtp.gmail.com
-EMAIL_PORT=587
-EMAIL_USER=your_email@example.com
-EMAIL_PASS=your_email_password
-GROQ_API_KEY=your_groq_api_key
-CLIENT_URL=http://localhost:5173
+# Production API URL
+VITE_API_URL=https://vbooking.onrender.com/api
 
-# Optional SMS config
-TWILIO_SID=your_twilio_account_sid
-TWILIO_TOKEN=your_twilio_auth_token
-TWILIO_FROM=+1234567890
-
-# Set to 1 to skip real notifications during local testing
-NOTIFY_TEST_MODE=0
-EMAIL_RETRY_ATTEMPTS=3
+# Development API URL (uncomment for local testing)
+# VITE_API_URL=http://localhost:8000/api
 ```
 
-### `frontend/.env`
+## 🔧 Deployment Guide
 
-```env
-VITE_API_URL=http://localhost:8000/api
-```
+### Deploy Backend to Render
 
-## Useful Scripts
+1. Push code to GitHub
+2. Create new Web Service on [Render](https://render.com/)
+3. Connect GitHub repository
+4. Set environment variables
+5. Deploy
+
+### Deploy Frontend to Vercel
+
+1. Push code to GitHub
+2. Import project on [Vercel](https://vercel.com/)
+3. Add environment variables
+4. Deploy
+
+**Note**: After deployment, update `FRONTEND_URLS` in backend to include your Vercel URL.
+
+## 📚 Useful Scripts
 
 ### Backend
 
-- `npm run dev` - start the API with nodemon
-- `npm start` - start the API in production mode
-- `node scripts/smokeNotifyTest.js` - run notification smoke test in test mode
-- `node scripts/integrationTest.js` - run AI booking integration test
+```bash
+npm run dev                          # Start with nodemon (development)
+npm start                           # Start production server
+node scripts/smokeNotifyTest.js     # Test notification system
+node scripts/integrationTest.js     # Test AI booking flow
+```
 
 ### Frontend
 
-- `npm run dev` - start the Vite dev server
-- `npm run build` - create a production build
-- `npm run preview` - preview the production build
+```bash
+npm run dev                         # Start Vite dev server
+npm run build                       # Create production build
+npm run preview                     # Preview production build
+```
 
-## Notes
+## 🔐 Security Features
 
-- Owner-only screens are protected behind authentication.
-- Public booking pages are available without customer registration.
-- SMS is optional and only works when Twilio credentials are configured.
-- Logs rotate in production through Winston Daily Rotate File.
+- **JWT Authentication** with refresh tokens
+- **Password Hashing** with bcrypt
+- **CORS** protection with configurable origins
+- **Environment Variables** for sensitive data
+- **Input Validation** on all endpoints
+- **Error Handling** without exposing stack traces
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 👤 Author
+
+**Santosh Kumar Sah**
+- LinkedIn: [santosh-kumar-sah-45a9b6328](https://www.linkedin.com/in/santosh-kumar-sah-45a9b6328/)
+- GitHub: [SureshSirf](https://github.com/SureshSirf)
+
+## 📞 Support
+
+For issues and questions, please create an issue on the [GitHub repository](https://github.com/SureshSirf/SalonBook)
+
+## 🚀 Roadmap
+
+- [ ] Multi-language support
+- [ ] Payment integration (Razorpay/Stripe)
+- [ ] Video call consultations
+- [ ] Advanced analytics and reporting
+- [ ] Mobile apps (iOS/Android)
+- [ ] Calendar sync (Google Calendar, Outlook)
+- [ ] Staff/Employee management
+- [ ] Service categories and pricing
