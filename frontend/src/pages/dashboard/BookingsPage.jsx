@@ -89,10 +89,21 @@ const BookingsPage = () => {
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-        <Input label="Search" placeholder="Search by customer name" value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} leftIcon={<Search className="h-4 w-4" />} />
+        <div>
+          <p className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">Search</p>
+          <div className="flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 shadow-sm dark:border-white/10 dark:bg-white/5 dark:shadow-none">
+            <Search className="h-4 w-4 text-slate-400 dark:text-slate-500" />
+            <input
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+              placeholder="Search by customer name"
+              className="w-full bg-transparent py-3 text-slate-900 placeholder-slate-400 focus:outline-none dark:text-white dark:placeholder-slate-500"
+            />
+          </div>
+        </div>
         <div className="flex flex-wrap gap-2">
           {tabs.map((tab) => (
-            <Button key={tab} variant={activeTab === tab ? 'primary' : 'secondary'} size="sm" onClick={() => { setActiveTab(tab); setPage(1); }}>
+            <Button key={tab} variant={activeTab === tab ? 'primary' : 'secondary'} size="sm" className={activeTab === tab ? 'text-white' : 'bg-white border border-slate-300 text-slate-700 hover:border-primary-400 hover:text-primary-600 dark:bg-white/5 dark:border-white/10 dark:text-slate-400 dark:hover:text-white'} onClick={() => { setActiveTab(tab); setPage(1); }}>
               {tab}
             </Button>
           ))}
@@ -106,15 +117,15 @@ const BookingsPage = () => {
       </div>
 
       {!pageQuery.isLoading && filteredBookings.length === 0 ? (
-        <Card className="flex flex-col items-center justify-center gap-3 p-12 text-center text-slate-400">
-          <Calendar className="h-10 w-10 text-slate-500" />
+        <Card className="flex flex-col items-center justify-center gap-3 p-12 text-center text-slate-500 dark:text-slate-400">
+          <Calendar className="h-10 w-10 text-slate-500 dark:text-slate-400" />
           <p>No bookings found</p>
         </Card>
       ) : null}
 
       <div className="flex items-center justify-between gap-4">
         <Button variant="secondary" size="sm" disabled={page === 1} onClick={() => setPage((value) => Math.max(1, value - 1))}>Prev</Button>
-        <p className="text-sm text-slate-400">Page {page} of {totalPages}</p>
+        <p className="text-sm text-slate-500 dark:text-slate-400">Page {page} of {totalPages}</p>
         <Button variant="secondary" size="sm" disabled={page >= totalPages} onClick={() => setPage((value) => value + 1)}>Next</Button>
       </div>
 
@@ -135,14 +146,14 @@ const BookingsPage = () => {
             }}
           />
           <div>
-            <p className="mb-2 text-sm text-slate-400">Available slots for {rescheduleDate || 'selected date'}</p>
+            <p className="mb-2 text-sm text-slate-500 dark:text-slate-400">Available slots for {rescheduleDate || 'selected date'}</p>
             <SlotPicker
               slots={availableSlots}
               selectedSlot={selectedSlot?.slotConfigId || selectedSlot?.startTime}
               onSlotSelect={setSelectedSlot}
             />
           </div>
-          {selectedBooking ? <p className="text-sm text-slate-400">Current booking: {formatDate(selectedBooking.bookingDate)} · {selectedBooking.startTime}</p> : null}
+          {selectedBooking ? <p className="text-sm text-slate-500 dark:text-slate-400">Current booking: {formatDate(selectedBooking.bookingDate)} · {selectedBooking.startTime}</p> : null}
           <div className="flex justify-end gap-3">
             <Button variant="ghost" onClick={() => setSelectedBooking(null)}>Close</Button>
             <Button

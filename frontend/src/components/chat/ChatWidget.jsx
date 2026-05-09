@@ -67,22 +67,22 @@ const ChatWidget = ({ ownerId }) => {
             transition={{ duration: 0.25 }}
             className="fixed bottom-24 right-5 z-40 w-[min(92vw,420px)]"
           >
-            <Card className="overflow-hidden border-white/10 bg-surface-900 p-0 shadow-2xl shadow-black/30">
-              <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
-                <div className="flex items-center gap-2 text-sm font-semibold text-white">
-                  <Bot className="h-4 w-4 text-primary-400" /> AI Assistant
+            <Card className="overflow-hidden border border-slate-200 bg-white p-0 shadow-2xl dark:border-white/10 dark:bg-surface-900/95">
+              <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-4 py-3 dark:border-white/10 dark:bg-white/5">
+                <div className="flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white">
+                  <Bot className="h-4 w-4 text-primary-600 dark:text-primary-400" /> AI Assistant
                 </div>
-                <Button variant="ghost" size="sm" onClick={() => setOpen(false)} aria-label="Close chat">
+                <Button variant="ghost" size="sm" className="text-slate-500 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/10 dark:hover:text-white" onClick={() => setOpen(false)} aria-label="Close chat">
                   <X className="h-4 w-4" />
                 </Button>
               </div>
 
-              <div ref={scrollRef} className="max-h-[460px] space-y-3 overflow-y-auto px-4 py-4">
+              <div ref={scrollRef} className="max-h-[460px] space-y-3 overflow-y-auto bg-white px-4 py-4 dark:bg-transparent">
                 {messages.length ? messages.map((entry) => <ChatBubble key={entry.id} message={entry} />) : <ChatBubble message={{ role: 'assistant', content: `Hi! I'm your AI assistant. Ask about the business, services, or booking steps, and I’ll help.`, timestamp: new Date().toISOString() }} />}
                 {isTyping ? <ChatBubble isTyping /> : null}
               </div>
 
-              <div className="border-t border-white/10 p-4">
+              <div className="border-t border-slate-200 bg-slate-50 p-4 dark:border-white/10 dark:bg-white/5">
                 <ChatInput value={message} onChange={(event) => setMessage(event.target.value)} onSend={handleSend} disabled={isTyping} />
               </div>
             </Card>

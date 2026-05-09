@@ -3,7 +3,7 @@ import { Card } from '../ui/Card.jsx';
 
 const BookingTrendChart = ({ data = [] }) => (
   <Card className="p-5">
-    <h3 className="mb-4 text-lg font-semibold text-white">Booking trend</h3>
+    <h3 className="mb-4 text-lg font-semibold text-slate-900 dark:text-white">Booking trend</h3>
     <div className="h-72">
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart data={data}>

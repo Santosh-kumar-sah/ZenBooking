@@ -56,10 +56,10 @@ const DashboardHome = () => {
     const cancelled = bookings.filter((booking) => booking.status === 'cancelled').length;
     const cancellationRate = bookings.length ? (cancelled / bookings.length) * 100 : 0;
     return [
-      { label: "Today's bookings", value: todayBookings, icon: CalendarClock },
-      { label: "This week's bookings", value: thisWeekBookings, icon: CalendarDays },
-      { label: 'Upcoming confirmed', value: upcoming, icon: CircleDollarSign },
-      { label: 'Cancellation rate', value: cancellationRate, icon: TriangleAlert, suffix: '%' }
+      { label: "Today's bookings", value: todayBookings, icon: CalendarClock, borderClass: 'border-t-primary-500' },
+      { label: "This week's bookings", value: thisWeekBookings, icon: CalendarDays, borderClass: 'border-t-accent-500' },
+      { label: 'Upcoming confirmed', value: upcoming, icon: CircleDollarSign, borderClass: 'border-t-emerald-500' },
+      { label: 'Cancellation rate', value: cancellationRate, icon: TriangleAlert, suffix: '%', borderClass: 'border-t-amber-500' }
     ];
   }, [bookings, todayKey, start, end]);
 
@@ -89,12 +89,12 @@ const DashboardHome = () => {
   return (
     <div className="space-y-6">
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {bookingsQuery.isLoading ? Array.from({ length: 4 }).map((_, index) => <Skeleton key={index} className="h-28" />) : stats.map(({ label, value, icon: Icon, suffix = '' }) => (
-          <Card key={label} hover className="p-5">
+        {bookingsQuery.isLoading ? Array.from({ length: 4 }).map((_, index) => <Skeleton key={index} className="h-28" />) : stats.map(({ label, value, icon: Icon, suffix = '', borderClass }) => (
+          <Card key={label} hover className={`border-t-2 p-5 shadow-md dark:bg-gradient-to-br dark:from-surface-800 dark:to-surface-900 dark:shadow-none ${borderClass}`}>
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="text-sm text-slate-400">{label}</p>
-                <h2 className="mt-2 text-3xl font-bold text-white"><AnimatedNumber value={Number(value || 0)} />{suffix}</h2>
+                <p className="text-sm text-slate-600 dark:text-slate-400">{label}</p>
+                <h2 className="mt-2 text-3xl font-bold text-slate-900 dark:text-white"><AnimatedNumber value={Number(value || 0)} />{suffix}</h2>
               </div>
               <div className="rounded-2xl bg-gradient-to-r from-primary-500 to-accent-500 p-3 text-white">
                 <Icon className="h-5 w-5" />
@@ -108,10 +108,10 @@ const DashboardHome = () => {
         <Card className="p-5">
           <div className="mb-4 flex items-center justify-between gap-4">
             <div>
-              <h3 className="text-lg font-semibold text-white">Share booking link</h3>
-              <p className="text-sm text-slate-400">Send this link to customers so they can book instantly.</p>
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Share booking link</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400">Send this link to customers so they can book instantly.</p>
             </div>
-            <Link2 className="h-5 w-5 text-primary-400" />
+            <Link2 className="h-5 w-5 text-primary-600 dark:text-primary-400" />
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
             <Input value={bookingLink} readOnly />
@@ -126,7 +126,7 @@ const DashboardHome = () => {
 
       <section>
         <div className="mb-4 flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-white">Upcoming bookings</h3>
+          <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Upcoming bookings</h3>
         </div>
         <div className="space-y-3">
           {bookingsQuery.isLoading ? Array.from({ length: 5 }).map((_, index) => <Skeleton key={index} className="h-24" />) : upcomingBookings.map((booking) => (
@@ -134,8 +134,8 @@ const DashboardHome = () => {
               <div className="flex items-center gap-4">
                 <Avatar name={booking.customerName} />
                 <div>
-                  <h4 className="font-medium text-white">{booking.customerName}</h4>
-                  <p className="text-sm text-slate-400">{formatDate(booking.bookingDate)} · {formatTime(booking.startTime)}</p>
+                  <h4 className="font-medium text-slate-900 dark:text-white">{booking.customerName}</h4>
+                  <p className="text-sm text-slate-700 dark:text-slate-300">{formatDate(booking.bookingDate)} · {formatTime(booking.startTime)}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -146,7 +146,7 @@ const DashboardHome = () => {
               </div>
             </Card>
           ))}
-          {!bookingsQuery.isLoading && upcomingBookings.length === 0 ? <Card className="p-8 text-center text-slate-400">No upcoming bookings found.</Card> : null}
+          {!bookingsQuery.isLoading && upcomingBookings.length === 0 ? <Card className="p-8 text-center text-slate-500 dark:text-slate-400">No upcoming bookings found.</Card> : null}
         </div>
       </section>
     </div>

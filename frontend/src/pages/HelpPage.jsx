@@ -92,17 +92,17 @@ const faqItems = [
 const categories = ['All', 'Getting Started', 'For Business Owners', 'Bookings', 'AI Features', 'Account and Billing'];
 
 const FAQItem = ({ item, isOpen, onToggle }) => (
-  <Card className="border border-white/10 bg-white/5 overflow-hidden">
+  <Card className="border border-slate-200 bg-white overflow-hidden shadow-sm dark:border-white/10 dark:bg-white/5">
     <button
       onClick={onToggle}
-      className="w-full px-6 py-4 flex items-center justify-between hover:bg-white/10 transition-colors"
+      className="w-full px-6 py-4 flex items-center justify-between hover:bg-slate-50 transition-colors dark:hover:bg-white/10"
     >
       <span className="font-medium text-slate-900 dark:text-white text-left">{item.question}</span>
       <motion.div
         animate={{ rotate: isOpen ? 180 : 0 }}
         transition={{ duration: 0.2 }}
       >
-        <ChevronDown className="h-5 w-5 text-slate-400" />
+        <ChevronDown className="h-5 w-5 text-slate-500 dark:text-slate-400" />
       </motion.div>
     </button>
 
@@ -113,9 +113,9 @@ const FAQItem = ({ item, isOpen, onToggle }) => (
           animate={{ height: 'auto', opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="border-t border-white/10"
+          className="border-t border-slate-200 dark:border-white/10"
         >
-          <p className="px-6 py-4 text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p className="px-6 py-4 text-slate-700 dark:text-slate-300 leading-relaxed">
             {item.answer}
           </p>
         </motion.div>
@@ -143,7 +143,7 @@ const HelpPage = () => {
 
   return (
     <PublicLayout>
-      <div className="min-h-screen bg-surface-950 pt-20">
+      <div className="min-h-screen bg-slate-100 pt-20 dark:bg-surface-950">
         {/* Hero Section */}
         <section className="relative overflow-hidden py-12">
           <div className="absolute left-[-10%] top-[-15%] h-96 w-96 rounded-full bg-primary-500/20 blur-3xl animate-blob" />
@@ -155,27 +155,27 @@ const HelpPage = () => {
                 <Search className="h-6 w-6" />
               </div>
             </div>
-            <h1 className="text-4xl font-extrabold text-white">
+            <h1 className="text-4xl font-extrabold text-slate-900 dark:text-white">
               How can we help you?
             </h1>
-            <p className="mt-4 text-lg text-slate-300">
+            <p className="mt-4 text-lg text-slate-700 dark:text-slate-300">
               Find answers to common questions about ZenBooking
             </p>
 
             {/* Search Input */}
             <div className="mt-8 max-w-2xl mx-auto">
               <div className="relative">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400 dark:text-slate-500" />
                 <input
                   type="text"
                   placeholder="Search for answers..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className={cn(
-                    'w-full rounded-xl border px-12 py-4 bg-white/5 text-white placeholder:text-slate-400',
-                    'border-white/10 transition-colors duration-200',
-                    'focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20',
-                    'dark:bg-white/5 dark:border-white/10 dark:text-white'
+                    'w-full rounded-xl border px-12 py-4 bg-white text-slate-900 placeholder:text-slate-400',
+                    'border-slate-300 transition-colors duration-200',
+                    'focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:focus:border-primary-400 dark:focus:ring-primary-500/20',
+                    'dark:bg-white/5 dark:border-white/10 dark:text-white dark:placeholder:text-slate-500'
                   )}
                 />
               </div>
@@ -194,7 +194,7 @@ const HelpPage = () => {
                   'px-4 py-2 rounded-full text-sm font-medium transition-colors',
                   selectedCategory === category
                     ? 'bg-gradient-to-r from-primary-500 to-accent-500 text-white'
-                    : 'bg-white/5 text-slate-300 hover:bg-white/10 border border-white/10'
+                    : 'bg-white text-slate-700 hover:bg-slate-50 border border-slate-300 dark:bg-white/5 dark:text-slate-400 dark:hover:bg-white/10 dark:border-white/10'
                 )}
               >
                 {category}
@@ -218,7 +218,7 @@ const HelpPage = () => {
             </div>
           ) : (
             <div className="text-center py-12">
-              <p className="text-slate-400">No results found for your search.</p>
+                  <p className="text-slate-500 dark:text-slate-400">No results found for your search.</p>
               <button
                 onClick={() => {
                   setSearchTerm('');
@@ -240,8 +240,8 @@ const HelpPage = () => {
                 <LifeBuoy className="h-6 w-6" />
               </div>
               <div className="flex-1">
-                <h3 className="text-2xl font-bold text-white">Still have questions?</h3>
-                <p className="mt-2 text-slate-300">Our team is here to help</p>
+                <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Still have questions?</h3>
+                <p className="mt-2 text-slate-600 dark:text-slate-300">Our team is here to help</p>
                 <Link to="/contact">
                   <Button className="mt-6">Contact Us</Button>
                 </Link>

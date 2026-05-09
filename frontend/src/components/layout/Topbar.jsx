@@ -5,6 +5,7 @@ import { Button } from '../ui/Button.jsx';
 import { Avatar } from '../ui/Avatar.jsx';
 import { cn } from '../../utils/cn.js';
 import { useAuthStore } from '../../store/authStore.js';
+import ThemeToggle from './ThemeToggle.jsx';
 
 const routeTitles = {
   '/dashboard/home': 'Dashboard',
@@ -30,22 +31,23 @@ const Topbar = ({ onMenuToggle }) => {
   };
 
   return (
-    <header className={cn('sticky top-0 z-30 flex items-center justify-between gap-4 border-b border-white/10 bg-surface-950/85 px-4 py-4 backdrop-blur-xl sm:px-6')}>
+    <header className={cn('sticky top-0 z-30 flex items-center justify-between gap-4 border-b border-slate-300 bg-white px-4 py-4 shadow-sm backdrop-blur-xl dark:border-white/5 dark:bg-surface-950/80 dark:shadow-none sm:px-6')}>
       <div className="flex items-center gap-3">
         <Button variant="ghost" size="sm" className="lg:hidden" onClick={onMenuToggle} aria-label="Open sidebar">
           <Menu className="h-5 w-5" />
         </Button>
         <div>
-          <p className="text-sm text-slate-400">{title}</p>
-          <h1 className="text-lg font-semibold text-white">{greeting}, {owner?.name || 'Owner'}</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400">{title}</p>
+          <h1 className="text-lg font-semibold text-slate-900 dark:text-white">{greeting}, {owner?.name || 'Owner'}</h1>
         </div>
       </div>
       <div className="flex items-center gap-3">
-        <Button variant="ghost" size="sm" aria-label="Notifications">
+        <ThemeToggle />
+        <Button variant="ghost" size="sm" className="text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white" aria-label="Notifications">
           <Bell className="h-4 w-4" />
         </Button>
         <Avatar name={owner?.name || 'Owner'} />
-        <Button variant="ghost" size="sm" className="text-red-400 hover:bg-red-500/10 hover:text-red-300" onClick={confirmLogout} aria-label="Logout">
+        <Button variant="ghost" size="sm" className="text-slate-600 hover:text-red-600 dark:text-slate-400 dark:hover:text-red-400" onClick={confirmLogout} aria-label="Logout">
           <LogOut className="h-4 w-4" />
         </Button>
       </div>

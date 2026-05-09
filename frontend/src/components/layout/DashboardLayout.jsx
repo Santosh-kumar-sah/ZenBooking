@@ -19,11 +19,11 @@ const DashboardLayout = () => {
   }
 
   return (
-    <div className="min-h-screen bg-surface-950 text-slate-100 lg:flex">
+    <div className="min-h-screen bg-slate-100 text-slate-900 dark:bg-surface-950 dark:text-slate-100 lg:flex">
       <div className="hidden lg:block">
         <Sidebar isCollapsed={collapsed} onToggle={() => setCollapsed((value) => !value)} />
       </div>
-      {mobileOpen ? <div className="fixed inset-0 z-30 bg-surface-950/70 lg:hidden" onClick={() => setMobileOpen(false)} /> : null}
+      {mobileOpen ? <div className="fixed inset-0 z-30 bg-slate-900/40 dark:bg-surface-950/70 lg:hidden" onClick={() => setMobileOpen(false)} /> : null}
       <div className={cn('lg:hidden', mobileOpen ? 'block' : 'hidden')}>
         <Sidebar isCollapsed={false} onToggle={() => setMobileOpen(false)} />
       </div>

@@ -125,24 +125,24 @@ const SettingsPage = () => {
 
   return (
     <div className="space-y-6">
-      <Card className="p-5">
+      <Card className="border border-slate-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-white/5 dark:shadow-none">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h2 className="text-xl font-semibold text-white">AI Prompt Panel</h2>
-            <p className="text-sm text-slate-400">Type a prompt and choose whether the AI should answer as customer support or owner support.</p>
+            <h2 className="text-xl font-semibold text-slate-900 dark:text-white">AI Prompt Panel</h2>
+            <p className="text-sm text-slate-600 dark:text-slate-400">Type a prompt and choose whether the AI should answer as customer support or owner support.</p>
           </div>
-          <div className="inline-flex rounded-full border border-white/10 bg-white/5 p-1">
+          <div className="inline-flex rounded-full border border-slate-300 bg-slate-50 p-1 dark:border-white/10 dark:bg-white/5">
             <button
               type="button"
               onClick={() => setPromptRole('owner')}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${promptRole === 'owner' ? 'bg-primary-500 text-white' : 'text-slate-300 hover:text-white'}`}
+              className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${promptRole === 'owner' ? 'bg-primary-500 text-white' : 'text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'}`}
             >
               Owner
             </button>
             <button
               type="button"
               onClick={() => setPromptRole('customer')}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${promptRole === 'customer' ? 'bg-primary-500 text-white' : 'text-slate-300 hover:text-white'}`}
+              className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${promptRole === 'customer' ? 'bg-primary-500 text-white' : 'text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'}`}
             >
               Customer
             </button>
@@ -151,13 +151,13 @@ const SettingsPage = () => {
 
         <div className="mt-5 grid gap-4">
           <label className="block">
-            <span className="mb-1 block text-sm text-slate-400">Prompt</span>
+            <span className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">Prompt</span>
             <textarea
               rows={4}
               value={promptText}
               onChange={(event) => setPromptText(event.target.value)}
               placeholder={promptRole === 'owner' ? 'Example: Write a short reply for a customer asking about weekend availability.' : 'Example: Explain the public booking process in simple words.'}
-              className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:ring-2 focus:ring-primary-500"
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 dark:border-white/10 dark:bg-white/5 dark:text-white"
             />
           </label>
 
@@ -183,23 +183,23 @@ const SettingsPage = () => {
             </Button>
           </div>
 
-          <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-            <p className="text-sm font-medium text-white">AI response</p>
-            <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-slate-300">
+          <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-white/10 dark:bg-white/5">
+            <p className="text-sm font-medium text-slate-900 dark:text-white">AI response</p>
+            <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-slate-700 dark:text-slate-300">
               {promptReply || 'Your response will appear here.'}
             </p>
           </div>
         </div>
       </Card>
 
-      <Card className="p-5">
-        <h2 className="text-xl font-semibold text-white">Profile</h2>
+      <Card className="border border-slate-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-white/5 dark:shadow-none">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-white">Profile</h2>
         <form className="mt-5 grid gap-4 md:grid-cols-2" onSubmit={handleProfileSubmit((values) => profileMutation.mutate({ ...owner, ...values }))}>
           <Input label="Name" {...registerProfile('name')} />
           <Input label="Phone" {...registerProfile('phone')} />
           <label className="block">
-            <span className="mb-1 block text-sm text-slate-400">Timezone</span>
-            <select className="h-[50px] w-full rounded-xl border border-white/10 bg-white/5 px-4 text-white outline-none" {...registerProfile('timezone')}>
+            <span className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">Timezone</span>
+            <select className="h-[50px] w-full rounded-xl border border-slate-300 bg-white px-4 text-slate-900 outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 dark:border-white/10 dark:bg-white/5 dark:text-white" {...registerProfile('timezone')}>
               {timezones.map((timezone) => <option key={timezone} value={timezone} className="bg-surface-900">{timezone}</option>)}
             </select>
           </label>
@@ -209,16 +209,16 @@ const SettingsPage = () => {
         </form>
       </Card>
 
-      <Card className="p-5">
-        <h2 className="text-xl font-semibold text-white">Business Info</h2>
+      <Card className="border border-slate-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-white/5 dark:shadow-none">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-white">Business Info</h2>
         <div className="mt-5 grid gap-4">
-          <Input label="Business name" value={businessDefaults.businessName} readOnly />
-          <Input label="Business type" value={businessDefaults.businessType} readOnly />
+          <Input label="Business name" value={businessDefaults.businessName} readOnly className="bg-slate-50 border-slate-200 text-slate-700 dark:bg-white/5 dark:border-white/10 dark:text-slate-200 rounded-xl px-4 py-3 shadow-none" />
+          <Input label="Business type" value={businessDefaults.businessType} readOnly className="bg-slate-50 border-slate-200 text-slate-700 dark:bg-white/5 dark:border-white/10 dark:text-slate-200 rounded-xl px-4 py-3 shadow-none" />
           <label className="block">
-            <span className="mb-1 block text-sm text-slate-400">Business description</span>
+            <span className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">Business description</span>
             <textarea
               rows={4}
-              className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:ring-2 focus:ring-primary-500"
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 dark:border-white/10 dark:bg-white/5 dark:text-white"
               {...registerBusiness('businessDescription')}
             />
           </label>
@@ -233,13 +233,13 @@ const SettingsPage = () => {
         </div>
       </Card>
 
-      <Card className="p-5">
+      <Card className="border border-slate-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-white/5 dark:shadow-none">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h2 className="text-xl font-semibold text-white">Share Booking Link</h2>
-            <p className="text-sm text-slate-400">Your public page customers can use to book appointments.</p>
+            <h2 className="text-xl font-semibold text-slate-900 dark:text-white">Share Booking Link</h2>
+            <p className="text-sm text-slate-600 dark:text-slate-400">Your public page customers can use to book appointments.</p>
           </div>
-          <Link2 className="h-5 w-5 text-primary-400" />
+          <Link2 className="h-5 w-5 text-primary-600 dark:text-primary-400" />
         </div>
         <div className="mt-4 flex flex-col gap-3 sm:flex-row">
           <Input value={bookingLink} readOnly />
@@ -248,8 +248,8 @@ const SettingsPage = () => {
         </div>
       </Card>
 
-      <Card className="p-5">
-        <h2 className="text-xl font-semibold text-white">Change Password</h2>
+      <Card className="border border-slate-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-white/5 dark:shadow-none">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-white">Change Password</h2>
         <form className="mt-5 grid gap-4 md:grid-cols-2" onSubmit={handlePasswordSubmit((values) => passwordMutation.mutate({ ...values }))}>
           <Input label="Current password" type="password" {...registerPassword('currentPassword')} />
           <Input label="New password" type="password" {...registerPassword('newPassword')} />

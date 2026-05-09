@@ -5,3 +5,4 @@ export { Footer } from './Footer.jsx';
 export { MiniFooter } from './Footer.jsx';
 export { PublicLayout } from './PublicLayout.jsx';
 export { ProtectedRoute } from './ProtectedRoute.jsx';
+export { default as ThemeToggle } from './ThemeToggle.jsx';

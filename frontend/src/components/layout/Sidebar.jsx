@@ -25,11 +25,11 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
   };
 
   return (
-    <aside className={cn('fixed inset-y-0 left-0 z-40 flex h-full flex-col border-r border-white/10 bg-surface-950/95 px-3 py-4 backdrop-blur-xl transition-all duration-300', isCollapsed ? 'w-20' : 'w-72')}>
+    <aside className={cn('fixed inset-y-0 left-0 z-40 flex h-full flex-col border-r border-slate-300 bg-white px-3 py-4 shadow-lg backdrop-blur-xl transition-all duration-300 dark:border-white/5 dark:bg-surface-900 dark:shadow-none', isCollapsed ? 'w-20' : 'w-72')}>
       <div className="mb-8 flex items-center justify-between gap-3 px-2">
         <div className={cn('flex items-center gap-3', isCollapsed && 'justify-center')}>
           <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-accent-500 font-black text-white">BA</div>
-          {!isCollapsed ? <div><p className="font-semibold text-white">BookAI</p><p className="text-xs text-slate-400">{owner?.businessName || 'AI booking dashboard'}</p></div> : null}
+          {!isCollapsed ? <div><p className="font-semibold text-slate-900 dark:text-white">BookAI</p><p className="text-xs text-slate-500 dark:text-slate-500">{owner?.businessName || 'AI booking dashboard'}</p></div> : null}
         </div>
         <Button variant="ghost" size="sm" className={cn('hidden lg:inline-flex', isCollapsed && 'rotate-180')} onClick={onToggle} aria-label="Collapse sidebar">
           <ChevronLeft className="h-4 w-4" />
@@ -40,7 +40,7 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
           <NavLink
             key={to}
             to={to}
-            className={({ isActive }) => cn('flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition-all duration-300', isActive ? 'border border-primary-500/30 bg-gradient-to-r from-primary-500/20 to-accent-500/20 text-white' : 'text-slate-400 hover:bg-white/5 hover:text-white', isCollapsed && 'justify-center px-3')}
+            className={({ isActive }) => cn('flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition-all duration-300', isActive ? 'border border-primary-500/30 bg-gradient-to-r from-primary-500/20 to-accent-500/20 text-white' : 'text-slate-700 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white', isCollapsed && 'justify-center px-3')}
             title={label}
           >
             <Icon className="h-5 w-5" />
@@ -48,7 +48,7 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
           </NavLink>
         ))}
       </nav>
-      <Button variant="ghost" className="mt-4 justify-start text-red-400 hover:bg-red-500/10 hover:text-red-300" onClick={confirmLogout} aria-label="Logout">
+      <Button variant="ghost" className="mt-4 justify-start text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-500/10" onClick={confirmLogout} aria-label="Logout">
         <LogOut className="h-4 w-4" />
         {!isCollapsed ? <span>Logout</span> : null}
       </Button>

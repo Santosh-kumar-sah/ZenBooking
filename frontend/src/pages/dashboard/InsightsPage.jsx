@@ -74,17 +74,17 @@ const InsightsPage = () => {
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {bookingsQuery.isLoading ? Array.from({ length: 4 }).map((_, index) => <Skeleton key={index} className="h-28" />) : statCards.map((card) => (
           <Card key={card.label} className="p-5">
-            <p className="text-sm text-slate-400">{card.label}</p>
-            <h3 className="mt-2 text-2xl font-bold text-white">{card.value}</h3>
+            <p className="text-sm text-slate-600 dark:text-slate-400">{card.label}</p>
+            <h3 className="mt-2 text-2xl font-bold text-slate-900 dark:text-white">{card.value}</h3>
           </Card>
         ))}
       </section>
 
-      <Card className="p-5">
+      <Card className="border border-slate-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-white/5">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h2 className="text-xl font-semibold text-white">AI Insights</h2>
-            <p className="mt-1 text-sm text-slate-400">Generate Groq-powered analysis from your live bookings.</p>
+            <h2 className="text-xl font-semibold text-slate-900 dark:text-white">AI Insights</h2>
+            <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">Generate Groq-powered analysis from your live bookings.</p>
           </div>
           <Button onClick={() => insightsMutation.mutate()} loading={insightsMutation.isPending}>
             {insightsText ? <RefreshCw className="h-4 w-4" /> : <Sparkles className="h-4 w-4" />} {insightsText ? 'Regenerate' : 'Generate AI Insights'}
@@ -107,7 +107,7 @@ const InsightsPage = () => {
             {insightLines.map((line, index) => (
               <div key={`${line}-${index}`} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
                 <span className="mt-2 h-2 w-2 rounded-full bg-gradient-to-r from-primary-500 to-accent-500" />
-                <p className="text-sm leading-6 text-slate-200">{line}</p>
+                <p className="text-sm leading-6 text-slate-800 dark:text-slate-200">{line}</p>
               </div>
             ))}
           </div>

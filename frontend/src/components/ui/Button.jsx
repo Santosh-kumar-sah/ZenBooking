@@ -3,9 +3,9 @@ import { Spinner } from './Spinner.jsx';
 
 const variants = {
   primary: 'bg-gradient-to-r from-primary-500 to-accent-500 text-white hover:opacity-90',
-  secondary: 'bg-white/10 border border-white/20 text-white hover:bg-white/20',
+  secondary: 'bg-white border border-slate-300 text-slate-800 shadow-sm hover:bg-slate-50 dark:bg-white/10 dark:border-white/20 dark:text-white dark:shadow-none dark:hover:bg-white/20',
   danger: 'bg-red-500/20 border border-red-500/30 text-red-400 hover:bg-red-500/30',
-  ghost: 'bg-transparent text-slate-400 hover:text-white hover:bg-white/5'
+  ghost: 'bg-transparent text-slate-700 hover:text-slate-900 hover:bg-slate-200 dark:text-slate-400 dark:hover:text-white dark:hover:bg-white/5'
 };
 
 const sizes = {

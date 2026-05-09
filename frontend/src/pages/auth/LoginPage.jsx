@@ -52,7 +52,7 @@ const LoginPage = () => {
   });
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-surface-950 px-4 py-12">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-100 px-4 py-12 dark:bg-surface-950">
       <div className="absolute left-[-10%] top-[-10%] h-96 w-96 rounded-full bg-primary-500/20 blur-3xl animate-blob" />
       <div className="absolute right-[-5%] top-[15%] h-[28rem] w-[28rem] rounded-full bg-accent-500/20 blur-3xl animate-blob [animation-delay:2s]" />
 
@@ -60,7 +60,7 @@ const LoginPage = () => {
         <div className="mb-8 text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-accent-500 text-xl font-black text-white">BA</div>
           <h1 className="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-3xl font-black text-transparent">BookAI</h1>
-          <p className="mt-2 text-sm text-slate-400">Sign in to your dashboard</p>
+          <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">Sign in to your dashboard</p>
         </div>
 
         <form className="space-y-5" onSubmit={handleSubmit((values) => loginMutation.mutate(values))}>
@@ -76,8 +76,8 @@ const LoginPage = () => {
           />
 
           <div className="flex items-center justify-between">
-            <label className="inline-flex items-center gap-2 text-sm text-slate-300">
-              <input type="checkbox" className="h-4 w-4 rounded bg-white/5" checked={remember} onChange={(e) => setRemember(e.target.checked)} />
+            <label className="inline-flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
+              <input type="checkbox" className="h-4 w-4 rounded border border-slate-300 bg-white dark:border-white/10 dark:bg-white/5" checked={remember} onChange={(e) => setRemember(e.target.checked)} />
               Remember me
             </label>
             <a href="#" className="text-sm text-primary-300">Forgot password?</a>
@@ -88,7 +88,7 @@ const LoginPage = () => {
           </Button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-slate-400">
+        <p className="mt-6 text-center text-sm text-slate-500 dark:text-slate-400">
           Don&apos;t have an account? <Link to={ROUTES.REGISTER} className="font-semibold text-primary-400">Register here</Link>
         </p>
       </Card>

@@ -63,7 +63,7 @@ const RegisterPage = () => {
   });
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-surface-950 px-4 py-12">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-100 px-4 py-12 dark:bg-surface-950">
       <div className="absolute left-[-10%] top-[-10%] h-96 w-96 rounded-full bg-primary-500/20 blur-3xl animate-blob" />
       <div className="absolute right-[-5%] top-[15%] h-[28rem] w-[28rem] rounded-full bg-accent-500/20 blur-3xl animate-blob [animation-delay:2s]" />
 
@@ -71,7 +71,7 @@ const RegisterPage = () => {
         <div className="mb-8 text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-accent-500 text-xl font-black text-white">BA</div>
           <h1 className="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-3xl font-black text-transparent">Create account</h1>
-          <p className="mt-2 text-sm text-slate-400">Launch your AI booking page in minutes</p>
+          <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">Launch your AI booking page in minutes</p>
         </div>
 
         <form className="space-y-5" onSubmit={handleSubmit((values) => registerMutation.mutate(values))}>
@@ -89,15 +89,15 @@ const RegisterPage = () => {
           <Input label="Business name" placeholder="Glow Salon" leftIcon={<Store className="h-4 w-4" />} {...register('businessName')} error={errors.businessName?.message} />
 
           <label className="block">
-            <span className="mb-1 block text-sm text-slate-400">Business type</span>
-            <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 focus-within:ring-2 focus-within:ring-primary-500">
-              <BriefcaseBusiness className="h-4 w-4 text-slate-400" />
-              <select className="w-full bg-transparent py-3 text-white outline-none" {...register('businessType')}>
+            <span className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">Business type</span>
+            <div className="flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-500/20 dark:border-white/10 dark:bg-white/5">
+              <BriefcaseBusiness className="h-4 w-4 text-slate-600 dark:text-slate-400" />
+              <select className="w-full bg-transparent py-3 text-slate-900 outline-none dark:text-white" {...register('businessType')}>
                 <option value="" className="bg-surface-900">Select one</option>
                 {businessTypes.map((businessType) => <option key={businessType} value={businessType} className="bg-surface-900">{businessType}</option>)}
               </select>
             </div>
-            {errors.businessType?.message ? <p className="mt-1 text-xs text-red-400">{errors.businessType.message}</p> : null}
+            {errors.businessType?.message ? <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.businessType.message}</p> : null}
           </label>
 
           {!generating ? (
@@ -105,7 +105,7 @@ const RegisterPage = () => {
               Create account
             </Button>
           ) : (
-            <div className="flex h-12 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 text-sm text-slate-200">
+            <div className="flex h-12 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
               <span>✨ AI is generating your business page</span>
               <motion.span animate={{ opacity: [0.2, 1, 0.2] }} transition={{ duration: 1.2, repeat: Infinity }} className="inline-flex gap-1">
                 <span>•</span><span>•</span><span>•</span>
@@ -114,7 +114,7 @@ const RegisterPage = () => {
           )}
         </form>
 
-        <p className="mt-6 text-center text-sm text-slate-400">
+        <p className="mt-6 text-center text-sm text-slate-500 dark:text-slate-400">
           Already have an account? <Link to={ROUTES.LOGIN} className="font-semibold text-primary-400">Sign in</Link>
         </p>
       </Card>

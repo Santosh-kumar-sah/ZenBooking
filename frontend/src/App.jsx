@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect } from 'react';
 import { DashboardLayout, ProtectedRoute } from './components/layout/index.js';
 import { LoginPage, RegisterPage } from './pages/auth/index.js';
 import { DashboardHome, BookingsPage, SlotsPage, InsightsPage, SettingsPage } from './pages/dashboard/index.js';
@@ -10,9 +11,20 @@ import { TermsPage } from './pages/TermsPage.jsx';
 import { PrivacyPage } from './pages/PrivacyPage.jsx';
 import { HelpPage } from './pages/HelpPage.jsx';
 import { routes } from './constants/routes.js';
+import { useThemeStore } from './store/themeStore.js';
 
 const App = () => {
   const location = useLocation();
+  const theme = useThemeStore((state) => state.theme);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+  }, [theme]);
 
   return (
     <AnimatePresence mode="wait" initial={false}>

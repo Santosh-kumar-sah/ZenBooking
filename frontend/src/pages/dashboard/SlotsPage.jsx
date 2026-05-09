@@ -18,8 +18,8 @@ const PageHeader = () => (
         <Clock className="h-5 w-5" />
       </div>
       <div>
-        <h1 className="text-2xl font-bold text-white">Slot Configuration</h1>
-        <p className="text-sm text-slate-400">Set your weekly working hours and block days off.</p>
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Slot Configuration</h1>
+        <p className="text-sm text-slate-700 dark:text-slate-300">Set your weekly working hours and block days off.</p>
       </div>
     </div>
   </div>
@@ -88,7 +88,7 @@ const SlotsPage = () => {
         <div className="mb-5 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <CalendarDays className="h-5 w-5 text-primary-400" />
-            <h2 className="text-lg font-semibold text-white">Weekly Availability</h2>
+            <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Weekly Availability</h2>
           </div>
           <span className="rounded-full border border-primary-500/20 bg-primary-500/10 px-3 py-1 text-xs font-medium text-primary-300">
             {activeCount} of {DAYS.length} days active
@@ -108,8 +108,8 @@ const SlotsPage = () => {
                   key={day}
                   className={`grid items-center gap-3 rounded-2xl border p-4 transition-all md:grid-cols-[160px_1fr_1fr_140px_48px] ${
                     row.isActive
-                      ? 'border-white/10 bg-white/[0.03]'
-                      : 'border-white/5 bg-white/[0.01] opacity-50'
+                      ? 'border-slate-200 bg-white shadow-sm dark:border-transparent dark:bg-surface-800/30 dark:shadow-none'
+                      : 'border-slate-200 bg-white opacity-60 shadow-sm dark:border-transparent dark:bg-surface-800/30 dark:shadow-none'
                   }`}
                 >
                   {/* Day toggle */}
@@ -123,41 +123,41 @@ const SlotsPage = () => {
                     >
                       <span className={`absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${row.isActive ? 'translate-x-5' : 'translate-x-0'}`} />
                     </button>
-                    <span className="text-sm font-medium text-white">{day}</span>
+                    <span className="text-sm font-medium text-slate-900 dark:text-white">{day}</span>
                   </label>
 
                   {/* Start time */}
                   <div>
-                    <label className="mb-1 block text-xs text-slate-400">Start time</label>
+                    <label className="mb-1 block text-xs text-slate-500 dark:text-slate-400">Start time</label>
                     <input
                       type="time"
                       value={row.startTime}
                       disabled={!row.isActive}
                       onChange={(e) => setRows((c) => ({ ...c, [day]: { ...c[day], startTime: e.target.value } }))}
-                      className="h-10 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-sm text-white outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-40"
+                      className="h-10 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 disabled:opacity-40 dark:border-white/10 dark:bg-white/5 dark:text-white"
                     />
                   </div>
 
                   {/* End time */}
                   <div>
-                    <label className="mb-1 block text-xs text-slate-400">End time</label>
+                    <label className="mb-1 block text-xs text-slate-500 dark:text-slate-400">End time</label>
                     <input
                       type="time"
                       value={row.endTime}
                       disabled={!row.isActive}
                       onChange={(e) => setRows((c) => ({ ...c, [day]: { ...c[day], endTime: e.target.value } }))}
-                      className="h-10 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-sm text-white outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-40"
+                      className="h-10 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 disabled:opacity-40 dark:border-white/10 dark:bg-white/5 dark:text-white"
                     />
                   </div>
 
                   {/* Duration */}
                   <div>
-                    <label className="mb-1 block text-xs text-slate-400">Slot duration</label>
+                    <label className="mb-1 block text-xs text-slate-500 dark:text-slate-400">Slot duration</label>
                     <select
                       value={row.durationMinutes}
                       disabled={!row.isActive}
                       onChange={(e) => setRows((c) => ({ ...c, [day]: { ...c[day], durationMinutes: Number(e.target.value) } }))}
-                      className="h-10 w-full rounded-xl border border-white/10 bg-surface-900 px-3 text-sm text-white outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-40"
+                      className="h-10 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 disabled:opacity-40 dark:border-white/10 dark:bg-surface-900 dark:text-white"
                     >
                       {[15, 20, 30, 45, 60, 90, 120].map((d) => (
                         <option key={d} value={d}>{d} min</option>
@@ -185,10 +185,10 @@ const SlotsPage = () => {
       {/* Blocked Dates */}
       <Card className="p-6">
         <div className="mb-5 flex items-center gap-2">
-          <X className="h-5 w-5 text-red-400" />
-          <h2 className="text-lg font-semibold text-white">Blocked Dates</h2>
+          <X className="h-5 w-5 text-red-600 dark:text-red-400" />
+          <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Blocked Dates</h2>
         </div>
-        <p className="mb-5 text-sm text-slate-400">Block specific dates for holidays, training, or vacations. Customers will not be able to book on these days.</p>
+        <p className="mb-5 text-sm text-slate-700 dark:text-slate-300">Block specific dates for holidays, training, or vacations. Customers will not be able to book on these days.</p>
 
         <div className="grid gap-4 md:grid-cols-[1fr_1fr_auto]">
           <Input type="date" label="Date to block" value={holidayDate} onChange={(e) => setHolidayDate(e.target.value)} />
@@ -209,15 +209,15 @@ const SlotsPage = () => {
             <Skeleton className="h-16" />
           ) : holidayList.length > 0 ? (
             holidayList.map((holiday) => (
-              <div key={holiday._id} className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
+              <div key={holiday._id} className="flex items-center justify-between rounded-2xl border border-slate-300 bg-slate-100 px-4 py-3 dark:border-white/10 dark:bg-white/5">
                 <div>
-                  <p className="text-sm font-medium text-white">{formatDate(holiday.date)}</p>
-                  <p className="text-xs text-slate-400">{holiday.reason || 'Blocked date'}</p>
+                  <p className="text-sm font-medium text-slate-800 dark:text-white">{formatDate(holiday.date)}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">{holiday.reason || 'Blocked date'}</p>
                 </div>
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-red-400 hover:bg-red-500/10 hover:text-red-300"
+                  className="text-slate-500 hover:text-red-600 dark:text-slate-400 dark:hover:text-red-400"
                   onClick={() => deleteHolidayMutation.mutate(holiday._id)}
                 >
                   <X className="h-4 w-4" />
