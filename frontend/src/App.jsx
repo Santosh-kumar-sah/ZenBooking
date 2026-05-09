@@ -5,6 +5,10 @@ import { LoginPage, RegisterPage } from './pages/auth/index.js';
 import { DashboardHome, BookingsPage, SlotsPage, InsightsPage, SettingsPage } from './pages/dashboard/index.js';
 import { PublicBookingPage, BookingConfirmPage } from './pages/public/index.js';
 import { LandingPage } from './pages/LandingPage.jsx';
+import { ContactPage } from './pages/ContactPage.jsx';
+import { TermsPage } from './pages/TermsPage.jsx';
+import { PrivacyPage } from './pages/PrivacyPage.jsx';
+import { HelpPage } from './pages/HelpPage.jsx';
 import { routes } from './constants/routes.js';
 
 const App = () => {
@@ -31,6 +35,10 @@ const App = () => {
           <Route path="insights" element={<InsightsPage />} />
           <Route path="settings" element={<SettingsPage />} />
         </Route>
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/help" element={<HelpPage />} />
         <Route path="/:ownerId/confirm" element={<BookingConfirmPage />} />
         <Route path="/:ownerId" element={<PublicBookingPage />} />
         <Route path="*" element={<Navigate to={routes.landing} replace />} />

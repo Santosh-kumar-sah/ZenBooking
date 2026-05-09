@@ -18,10 +18,10 @@ const businessLinks = [
 ];
 
 const supportLinks = [
-  { label: 'Help center', href: '#' },
-  { label: 'Contact us', href: '#' },
-  { label: 'Privacy policy', href: '#' },
-  { label: 'Terms of service', href: '#' }
+  { label: 'Help center', to: '/help' },
+  { label: 'Contact us', to: '/contact' },
+  { label: 'Privacy policy', to: '/privacy' },
+  { label: 'Terms of service', to: '/terms' }
 ];
 
 const socials = [
