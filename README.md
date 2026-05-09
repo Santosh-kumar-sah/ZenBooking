@@ -1,4 +1,4 @@
-<img width="720" height="1600" alt="Screenshot_20260509_145229" src="https://github.com/user-attachments/assets/d14f059f-f327-48af-a00e-2367b4d06ef5" />
+
 # ZenBooking
 
 **AI-Powered Appointment Booking Platform for Salons & Service Businesses**
