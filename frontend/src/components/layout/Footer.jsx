@@ -24,7 +24,11 @@ const supportLinks = [
   { label: 'Terms of service', href: '#' }
 ];
 
-const socials = [Twitter, Instagram, Linkedin];
+const socials = [
+  { icon: Twitter, url: '#', label: 'Twitter' },
+  { icon: Instagram, url: '#', label: 'Instagram' },
+  { icon: Linkedin, url: 'https://www.linkedin.com/in/santosh-kumar-sah-45a9b6328/', label: 'Linkedin' }
+];
 
 const Footer = ({ className = '' }) => (
   <footer className={cn('border-t border-white/10 bg-surface-900', className)}>
@@ -36,11 +40,14 @@ const Footer = ({ className = '' }) => (
         </Link>
         <p className="max-w-xs text-sm leading-6 text-slate-400">Your AI receptionist for appointments</p>
         <div className="flex items-center gap-3">
-          {socials.map((Icon) => (
-            <a key={Icon.displayName || Icon.name} href="#" aria-label={Icon.displayName || Icon.name} className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-colors duration-300 hover:border-white/20 hover:bg-white/10 hover:text-white">
-              <Icon className="h-4 w-4" />
-            </a>
-          ))}
+          {socials.map((social) => {
+            const Icon = social.icon;
+            return (
+              <a key={social.label} href={social.url} target="_blank" rel="noopener noreferrer" aria-label={social.label} className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-colors duration-300 hover:border-white/20 hover:bg-white/10 hover:text-white">
+                <Icon className="h-4 w-4" />
+              </a>
+            );
+          })}
         </div>
       </div>
 
