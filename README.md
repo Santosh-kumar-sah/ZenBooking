@@ -80,19 +80,27 @@ ZenBooking is a modern MERN-based appointment booking platform that combines AI-
 ## 📸 Screenshots
 
 ### Landing Page
-![ZenBooking Landing Page](https://via.placeholder.com/800x600?text=Landing+Page)
+<img width="1919" height="868" alt="Screenshot 2026-05-09 145020" src="https://github.com/user-attachments/assets/acde1f0b-cc8a-4080-91b2-10ae1cdac918" />
+
 
 ### Owner Dashboard
-![Owner Dashboard](https://via.placeholder.com/800x600?text=Owner+Dashboard)
+
+![Uploading Screenshot 2026-05-09 145020.png…]()
+<img width="1919" height="868" alt="Screenshot 2026-05-09 145029" src="https://github.com/user-attachments/assets/5f06be36-22b7-4b41-a65e-9148d455c48a" />
+
+
 
 ### Bookings Management
-![Bookings Page](https://via.placeholder.com/800x600?text=Bookings+Page)
+### Owner Dashboard
+<img width="1919" height="868" alt="Screenshot 2026-05-09 145020" src="https://github.com/user-attachments/assets/aa938538-7532-40e5-9be7-54493058915a" />
+
 
 ### Public Booking Page
-![Public Booking](https://via.placeholder.com/800x600?text=Public+Booking)
+<img width="1919" height="880" alt="Screenshot 2026-05-09 145302" src="https://github.com/user-attachments/assets/bdb02efa-e3dc-4c90-a2ae-cb377b262d78" />
 
 ### AI Chat Widget
-![AI Chat](https://via.placeholder.com/800x600?text=AI+Chat+Widget)
+![Uploading Screenshot 2026-05-09 145029.png…]()
+<img width="498" height="635" alt="Screenshot 2026-05-09 145141" src="https://github.com/user-attachments/assets/d1c1da92-ccb3-4e56-b04a-5892f8810968" />
 
 ## ⚙️ Setup & Installation
 
