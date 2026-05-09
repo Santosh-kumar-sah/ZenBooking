@@ -80,7 +80,8 @@ ZenBooking is a modern MERN-based appointment booking platform that combines AI-
 ## 📸 Screenshots
 
 ### Landing Page
-<img width="1919" height="868" alt="Screenshot 2026-05-09 145020" src="https://github.com/user-attachments/assets/acde1f0b-cc8a-4080-91b2-10ae1cdac918" />
+<img width="1919" height="905" alt="Screenshot 2026-05-09 200428" src="https://github.com/user-attachments/assets/12b2d408-bb1f-42cb-b9da-8688c2714b73" />
+
 
 
 ### Owner Dashboard
