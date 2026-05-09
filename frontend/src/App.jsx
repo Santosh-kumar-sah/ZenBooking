@@ -1,0 +1,42 @@
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
+import { DashboardLayout, ProtectedRoute } from './components/layout/index.js';
+import { LoginPage, RegisterPage } from './pages/auth/index.js';
+import { DashboardHome, BookingsPage, SlotsPage, InsightsPage, SettingsPage } from './pages/dashboard/index.js';
+import { PublicBookingPage, BookingConfirmPage } from './pages/public/index.js';
+import { LandingPage } from './pages/LandingPage.jsx';
+import { routes } from './constants/routes.js';
+
+const App = () => {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait" initial={false}>
+      <Routes location={location} key={location.pathname}>
+        <Route path={routes.landing} element={<LandingPage />} />
+        <Route path={routes.login} element={<LoginPage />} />
+        <Route path={routes.register} element={<RegisterPage />} />
+        <Route
+          path="/dashboard"
+          element={(
+            <ProtectedRoute>
+              <DashboardLayout />
+            </ProtectedRoute>
+          )}
+        >
+          <Route index element={<Navigate to={routes.dashboardHome} replace />} />
+          <Route path="home" element={<DashboardHome />} />
+          <Route path="bookings" element={<BookingsPage />} />
+          <Route path="slots" element={<SlotsPage />} />
+          <Route path="insights" element={<InsightsPage />} />
+          <Route path="settings" element={<SettingsPage />} />
+        </Route>
+        <Route path="/:ownerId/confirm" element={<BookingConfirmPage />} />
+        <Route path="/:ownerId" element={<PublicBookingPage />} />
+        <Route path="*" element={<Navigate to={routes.landing} replace />} />
+      </Routes>
+    </AnimatePresence>
+  );
+};
+
+export { App };
