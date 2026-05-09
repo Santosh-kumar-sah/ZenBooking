@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, Calendar, Clock, Sparkles, Settings, ChevronLeft, LogOut } from 'lucide-react';
 import { cn } from '../../utils/cn.js';
 import { routes } from '../../constants/routes.js';
@@ -14,12 +14,13 @@ const items = [
 ];
 
 const Sidebar = ({ isCollapsed, onToggle }) => {
+  const navigate = useNavigate();
   const owner = useAuthStore((state) => state.owner);
   const logout = useAuthStore((state) => state.logout);
   const confirmLogout = () => {
     if (window.confirm('Log out of your account?')) {
       logout();
-      window.location.href = '/login';
+      navigate(routes.login);
     }
   };
 

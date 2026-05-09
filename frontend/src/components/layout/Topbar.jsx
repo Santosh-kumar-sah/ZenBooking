@@ -1,5 +1,6 @@
 import { Bell, Menu, LogOut } from 'lucide-react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { routes } from '../../constants/routes.js';
 import { Button } from '../ui/Button.jsx';
 import { Avatar } from '../ui/Avatar.jsx';
 import { cn } from '../../utils/cn.js';
@@ -15,6 +16,7 @@ const routeTitles = {
 
 const Topbar = ({ onMenuToggle }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const owner = useAuthStore((state) => state.owner);
   const logout = useAuthStore((state) => state.logout);
   const hour = new Date().getHours();
@@ -23,7 +25,7 @@ const Topbar = ({ onMenuToggle }) => {
   const confirmLogout = () => {
     if (window.confirm('Log out of your account?')) {
       logout();
-      window.location.href = '/login';
+      navigate(routes.login);
     }
   };
 
