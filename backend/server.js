@@ -31,7 +31,18 @@ app.use(cors(corsOptions));
 // Connect DB
 await connectDB();
 
+// Root route - API status
+app.get('/', (req, res) => {
+  res.json({ 
+    success: true, 
+    message: 'ZenBooking API is running',
+    status: 'operational',
+    version: '1.0.0'
+  });
+});
+
 // Routers
+
 app.use('/api/auth', authRoutes);
 app.use('/api/slots', slotRoutes);
 app.use('/api/bookings', bookingRoutes);
