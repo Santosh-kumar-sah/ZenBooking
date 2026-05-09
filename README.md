@@ -1,3 +1,4 @@
+<img width="720" height="1600" alt="Screenshot_20260509_145229" src="https://github.com/user-attachments/assets/d14f059f-f327-48af-a00e-2367b4d06ef5" />
 # ZenBooking
 
 **AI-Powered Appointment Booking Platform for Salons & Service Businesses**
@@ -102,6 +103,14 @@ ZenBooking is a modern MERN-based appointment booking platform that combines AI-
 ### AI Chat Widget
 ![Uploading Screenshot 2026-05-09 145029.png…]()
 <img width="498" height="635" alt="Screenshot 2026-05-09 145141" src="https://github.com/user-attachments/assets/d1c1da92-ccb3-4e56-b04a-5892f8810968" />
+
+
+
+<img width="720" height="1600" alt="Screenshot_20260509_145229" src="https://github.com/user-attachments/assets/366d038e-951a-4322-a472-bb8c4b156537" />
+
+
+
+
 
 ## ⚙️ Setup & Installation
 
