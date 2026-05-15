@@ -1,7 +1,7 @@
 
 # ZenBooking
 
-**AI-Powered Appointment Booking Platform for Salons & Service Businesses**
+**AI-Powered Appointment Booking Platform for Salons & Service Businesses**.
 
 ZenBooking is a modern MERN-based appointment booking platform that combines AI-assisted booking, intuitive owner dashboards, and a seamless public customer experience. Let AI handle your bookings while you focus on your business.
 
