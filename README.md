@@ -236,9 +236,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - LinkedIn: [santosh-kumar-sah-45a9b6328](https://www.linkedin.com/in/santosh-kumar-sah-45a9b6328/)
 - GitHub: [SureshSirf](https://github.com/SureshSirf)
 
-## 📞 Support
 
-For issues and questions, please create an issue on the [GitHub repository](https://github.com/SureshSirf/SalonBook)
 
 ## 🚀 Roadmap
 
