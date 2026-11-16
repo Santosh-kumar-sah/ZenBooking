@@ -17,9 +17,9 @@ const safeDate = (value) => {
 const formatDate = (value) => format(safeDate(value), 'EEEE, d MMMM yyyy');
 const formatTime = (value) => {
   if (typeof value === 'string' && /^\d{2}:\d{2}$/.test(value)) {
-    return format(parse(value, 'HH:mm', new Date()), 'hh:mm a');
+    return format(parse(value, 'HH:mm', new Date()), 'h:mm a');
   }
-  return format(safeDate(value), 'hh:mm a');
+  return format(safeDate(value), 'h:mm a');
 };
 const isPastDate = (value) => isBefore(safeDate(value), new Date(new Date().setHours(0, 0, 0, 0)));
 const getDatesInRange = (startDate, endDate) => {

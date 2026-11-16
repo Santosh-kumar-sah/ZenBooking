@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { Bot, MessageCircle, X } from 'lucide-react';
+import { MessageSquare, Sparkles, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Button, Card } from '../ui/index.js';
 import { ChatBubble } from './ChatBubble.jsx';
@@ -41,8 +41,9 @@ const ChatWidget = ({ ownerId }) => {
 
   const handleSend = async () => {
     if (!message.trim()) return;
-    await sendMessage(message);
+    const msg = message;
     setMessage('');
+    await sendMessage(msg);
   };
 
   return (
@@ -50,40 +51,65 @@ const ChatWidget = ({ ownerId }) => {
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
-        className="fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-r from-primary-500 to-accent-500 text-white shadow-2xl shadow-primary-500/20"
-        aria-label="Open chat assistant"
+        className="fixed bottom-6 right-6 z-40 flex h-13 w-13 items-center justify-center rounded-full bg-atelier-900 text-white shadow-card hover:bg-atelier-800 hover:scale-105 active:scale-95 transition-all duration-200 dark:bg-white dark:text-atelier-900"
+        aria-label="Open Studio Concierge"
       >
-        <MessageCircle className="h-6 w-6" />
-        {unread > 0 ? <span className="absolute -right-1 -top-1 rounded-full bg-white px-2 py-0.5 text-[10px] font-bold text-surface-950">{unread}</span> : null}
-        <span className="absolute inset-0 rounded-full border border-primary-400/40 animate-ping" />
+        <MessageSquare className="h-5 w-5" />
+        {unread > 0 ? (
+          <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary-500 text-[10px] font-bold text-white shadow-sm">
+            {unread}
+          </span>
+        ) : null}
       </button>
 
       <AnimatePresence>
         {open ? (
           <motion.div
-            initial={{ opacity: 0, y: 24, x: 24 }}
-            animate={{ opacity: 1, y: 0, x: 0 }}
-            exit={{ opacity: 0, y: 24, x: 24 }}
-            transition={{ duration: 0.25 }}
-            className="fixed bottom-24 right-5 z-40 w-[min(92vw,420px)]"
+            initial={{ opacity: 0, y: 16, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 16, scale: 0.96 }}
+            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed bottom-22 right-6 z-40 w-[min(92vw,400px)]"
           >
-            <Card className="overflow-hidden border border-slate-200 bg-white p-0 shadow-2xl dark:border-white/10 dark:bg-surface-900/95">
-              <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-4 py-3 dark:border-white/10 dark:bg-white/5">
-                <div className="flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white">
-                  <Bot className="h-4 w-4 text-primary-600 dark:text-primary-400" /> AI Assistant
+            <Card className="overflow-hidden border border-atelier-200 bg-white p-0 shadow-card-hover dark:border-atelier-800 dark:bg-atelier-900">
+              {/* Concierge Header */}
+              <div className="flex items-center justify-between border-b border-atelier-200 bg-atelier-50/70 px-4 py-3.5 dark:border-atelier-800 dark:bg-atelier-850">
+                <div className="flex items-center gap-2.5">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-50 text-primary-600 dark:bg-primary-950/60 dark:text-primary-300">
+                    <Sparkles className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-semibold uppercase tracking-wider text-atelier-900 dark:text-atelier-100">Studio Concierge</h4>
+                    <p className="text-[11px] text-atelier-500 dark:text-atelier-400">Available to help you book</p>
+                  </div>
                 </div>
-                <Button variant="ghost" size="sm" className="text-slate-500 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/10 dark:hover:text-white" onClick={() => setOpen(false)} aria-label="Close chat">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-8 w-8 p-0 rounded-full text-atelier-500 hover:bg-atelier-200/50 dark:hover:bg-atelier-700"
+                  onClick={() => setOpen(false)}
+                  aria-label="Close concierge"
+                >
                   <X className="h-4 w-4" />
                 </Button>
               </div>
 
-              <div ref={scrollRef} className="max-h-[460px] space-y-3 overflow-y-auto bg-white px-4 py-4 dark:bg-transparent">
-                {messages.length ? messages.map((entry) => <ChatBubble key={entry.id} message={entry} />) : <ChatBubble message={{ role: 'assistant', content: `Hi! I'm your AI assistant. Ask about the business, services, or booking steps, and I’ll help.`, timestamp: new Date().toISOString() }} />}
+              {/* Messages feed */}
+              <div ref={scrollRef} className="max-h-[380px] min-h-[220px] space-y-3 overflow-y-auto px-4 py-4 bg-atelier-50/20 dark:bg-transparent">
+                {messages.map((entry) => (
+                  <ChatBubble key={entry.id} message={entry} />
+                ))}
                 {isTyping ? <ChatBubble isTyping /> : null}
               </div>
 
-              <div className="border-t border-slate-200 bg-slate-50 p-4 dark:border-white/10 dark:bg-white/5">
-                <ChatInput value={message} onChange={(event) => setMessage(event.target.value)} onSend={handleSend} disabled={isTyping} />
+              {/* Input Area */}
+              <div className="border-t border-atelier-200 bg-white p-3 dark:border-atelier-800 dark:bg-atelier-900">
+                <ChatInput
+                  value={message}
+                  onChange={(event) => setMessage(event.target.value)}
+                  onSend={handleSend}
+                  disabled={isTyping}
+                />
               </div>
             </Card>
           </motion.div>

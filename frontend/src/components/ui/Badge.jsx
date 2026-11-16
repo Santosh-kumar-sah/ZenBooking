@@ -1,16 +1,16 @@
 import { cn } from '../../utils/cn.js';
 
 const variants = {
-  confirmed: 'bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-300 dark:border-emerald-500/20',
-  cancelled: 'bg-red-100 text-red-700 border-red-200 dark:bg-red-500/10 dark:text-red-300 dark:border-red-500/20',
-  completed: 'bg-sky-100 text-sky-700 border-sky-200 dark:bg-sky-500/10 dark:text-sky-300 dark:border-sky-500/20',
-  pending: 'bg-amber-100 text-amber-700 border-amber-200 dark:bg-amber-500/10 dark:text-amber-300 dark:border-amber-500/20',
-  default: 'bg-slate-100 text-slate-700 border-slate-200 dark:bg-white/10 dark:text-slate-200 dark:border-white/10'
+  confirmed: 'bg-accent-50 text-accent-700 border-accent-200 dark:bg-accent-900/30 dark:text-accent-300 dark:border-accent-700/40',
+  cancelled: 'bg-red-50 text-red-700 border-red-200 dark:bg-red-950/30 dark:text-red-300 dark:border-red-800/40',
+  completed: 'bg-atelier-100 text-atelier-700 border-atelier-200 dark:bg-atelier-800 dark:text-atelier-300 dark:border-atelier-700',
+  pending: 'bg-amber-50 text-amber-800 border-amber-200 dark:bg-amber-950/30 dark:text-amber-300 dark:border-amber-800/40',
+  default: 'bg-atelier-50 text-atelier-700 border-atelier-200 dark:bg-atelier-850 dark:text-atelier-300 dark:border-atelier-700'
 };
 
 const Badge = ({ status = 'default', className, children }) => (
-  <span className={cn('inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium capitalize', variants[status] || variants.default, className)}>
-    <span className="h-1.5 w-1.5 rounded-full bg-current" />
+  <span className={cn('inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-medium tracking-tight capitalize select-none', variants[status] || variants.default, className)}>
+    <span className="h-1.5 w-1.5 rounded-full bg-current opacity-70" />
     {children || status}
   </span>
 );

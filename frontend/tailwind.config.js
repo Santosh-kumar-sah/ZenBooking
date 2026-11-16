@@ -5,81 +5,79 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif']
+        serif: ['Fraunces', 'Georgia', 'serif'],
+        sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif']
       },
       colors: {
-        primary: {
-          50:  '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e'
+        // Atelier core luxury palette
+        atelier: {
+          50:  '#FAF7F2',
+          100: '#F4EFEA',
+          200: '#E8E3DC',
+          300: '#DCD6CC',
+          400: '#A89F91',
+          500: '#78716C',
+          600: '#57534E',
+          700: '#44403C',
+          800: '#292524',
+          900: '#1C1917',
+          950: '#141210'
         },
+        // Warm Terracotta / Clay Primary (replaces cyan/neon)
+        primary: {
+          50:  '#FDF8F6',
+          100: '#F7EDE8',
+          200: '#EFDCD3',
+          300: '#E2C2B3',
+          400: '#D49B85',
+          500: '#C26D53',
+          600: '#A95C45',
+          700: '#8E4A37',
+          800: '#733B2C',
+          900: '#5C2E22',
+          950: '#3D1B13'
+        },
+        // Muted Sage / Olive Accent (replaces purple neon)
         accent: {
-          50:  '#faf5ff',
-          100: '#f3e8ff',
-          200: '#e9d5ff',
-          300: '#d8b4fe',
-          400: '#c084fc',
-          500: '#a855f7',
-          600: '#9333ea',
-          700: '#7e22ce',
-          800: '#6b21a8',
-          900: '#581c87'
+          50:  '#F4F7F4',
+          100: '#E9EFE9',
+          200: '#D4DFD4',
+          300: '#B2C6B3',
+          400: '#8DA88F',
+          500: '#678A6A',
+          600: '#4A6B53',
+          700: '#395340',
+          800: '#2B3E30',
+          900: '#1E2C22'
         },
         surface: {
-          50:  '#f8fafc',
-          100: '#f1f5f9',
-          200: '#e2e8f0',
-          800: '#1e293b',
-          900: '#0f172a',
-          950: '#020617'
+          50:  '#FAF7F2',
+          100: '#F4EFEA',
+          200: '#E8E3DC',
+          800: '#24201E',
+          900: '#1C1917',
+          950: '#141210'
         }
       },
       boxShadow: {
-        glow:    '0 0 40px -8px rgba(14,165,233,0.35)',
-        'glow-accent': '0 0 40px -8px rgba(168,85,247,0.35)',
-        glass:   '0 8px 32px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.06)'
-      },
-      backgroundImage: {
-        'hero-gradient':   'linear-gradient(135deg,rgba(14,165,233,0.35),rgba(168,85,247,0.35))',
-        'card-gradient':   'linear-gradient(135deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01))',
-        'primary-gradient':'linear-gradient(135deg,#0ea5e9,#a855f7)'
+        tactile: '0 2px 10px rgba(28, 25, 23, 0.04), 0 1px 3px rgba(28, 25, 23, 0.02)',
+        card: '0 10px 30px -4px rgba(28, 25, 23, 0.05), 0 2px 6px -1px rgba(28, 25, 23, 0.02)',
+        'card-hover': '0 20px 40px -8px rgba(28, 25, 23, 0.09), 0 6px 16px -2px rgba(28, 25, 23, 0.04)',
+        recessed: 'inset 0 2px 4px rgba(28, 25, 23, 0.06)'
       },
       keyframes: {
-        blob: {
-          '0%,100%': { transform: 'translate(0,0) scale(1)' },
-          '33%':     { transform: 'translate(30px,-20px) scale(1.08)' },
-          '66%':     { transform: 'translate(-20px,20px) scale(0.92)' }
+        floatSoft: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-6px)' }
         },
-        float: {
-          '0%,100%': { transform: 'translateY(0)' },
-          '50%':     { transform: 'translateY(-12px)' }
-        },
-        shimmer: {
-          '0%':   { backgroundPosition: '-200% 0' },
-          '100%': { backgroundPosition: '200% 0' }
-        },
-        pulseDot: {
-          '0%,80%,100%': { opacity: '0.3', transform: 'scale(0.8)' },
-          '40%':          { opacity: '1',   transform: 'scale(1)' }
-        },
-        fadeUp: {
-          '0%':   { opacity: '0', transform: 'translateY(16px)' },
+        fadeIn: {
+          '0%': { opacity: '0', transform: 'translateY(8px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' }
         }
       },
       animation: {
-        blob:      'blob 14s ease-in-out infinite',
-        float:     'float 3s ease-in-out infinite',
-        shimmer:   'shimmer 1.8s linear infinite',
-        pulseDot:  'pulseDot 1.2s infinite ease-in-out',
-        fadeUp:    'fadeUp 0.4s ease forwards'
+        floatSoft: 'floatSoft 4s ease-in-out infinite',
+        fadeIn: 'fadeIn 0.3s ease-out forwards'
       }
     }
   },

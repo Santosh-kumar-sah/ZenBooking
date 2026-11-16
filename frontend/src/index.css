@@ -7,31 +7,30 @@
 }
 
 html {
-  font-family: 'Inter', sans-serif;
-  background: rgb(241 245 249);
-  color: rgb(15 23 42);
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #FAF7F2;
+  color: #1C1917;
   scroll-behavior: smooth;
-  transition: background-color 250ms ease, color 250ms ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html.dark {
-  background: #020617;
-  color: #e2e8f0;
+  background-color: #141210;
+  color: #F4EFEA;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background: rgb(241 245 249);
-  color: rgb(15 23 42);
+  background-color: #FAF7F2;
+  color: #1C1917;
+  overflow-x: hidden;
 }
 
 html.dark body {
-  background:
-    radial-gradient(circle at top left, rgba(14, 165, 233, 0.16), transparent 30%),
-    radial-gradient(circle at top right, rgba(139, 92, 246, 0.12), transparent 26%),
-    #020617;
-  color: #e2e8f0;
+  background-color: #141210;
+  color: #F4EFEA;
 }
 
 * {
@@ -39,20 +38,65 @@ html.dark body {
 }
 
 ::selection {
-  background: rgba(14, 165, 233, 0.35);
-  color: white;
+  background: rgba(194, 109, 83, 0.25);
+  color: #1C1917;
+}
+
+html.dark ::selection {
+  background: rgba(194, 109, 83, 0.4);
+  color: #FAF7F2;
 }
 
 #root {
   min-height: 100vh;
 }
 
-@layer components {
-  .glass-panel {
-    @apply border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl shadow-primary-500/10;
-  }
+/* Custom 3D & Tactile utilities */
+.perspective-container {
+  perspective: 1200px;
+}
 
-  .page-shell {
-    @apply min-h-screen bg-slate-100 text-slate-900 dark:bg-surface-950 dark:text-slate-100;
-  }
+.card-tactile {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.2s ease;
+}
+
+.card-tactile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px -6px rgba(28, 25, 23, 0.08), 0 4px 12px -2px rgba(28, 25, 23, 0.03);
+}
+
+.card-3d-tilted {
+  transform: rotateX(4deg) rotateY(-3deg) rotateZ(0.5deg);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-3d-tilted:hover {
+  transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateY(-4px);
+}
+
+.font-editorial {
+  font-family: 'Fraunces', Georgia, serif;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #DCD6CC;
+  border-radius: 9999px;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #44403C;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A89F91;
 }

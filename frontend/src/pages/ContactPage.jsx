@@ -2,48 +2,40 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { motion } from 'framer-motion';
 import { Mail, MessageCircle, MapPin, Send } from 'lucide-react';
 import { PublicLayout } from '../components/layout/PublicLayout.jsx';
-import { Button, Card, Input, Spinner } from '../components/ui/index.js';
-import { cn } from '../utils/cn.js';
+import { Button, Card, Input } from '../components/ui/index.js';
 import { toast } from 'sonner';
 
 const contactSchema = z.object({
   fullName: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
+  email: z.string().email('Please enter a valid email address'),
   subject: z.string().min(5, 'Subject must be at least 5 characters'),
   category: z.enum(['general', 'technical', 'billing', 'feature', 'bug'], {
     errorMap: () => ({ message: 'Please select a category' })
   }),
-  message: z.string().min(20, 'Message must be at least 20 characters')
+  message: z.string().min(10, 'Message must be at least 10 characters')
 });
 
 const ContactPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset
   } = useForm({
-    resolver: zodResolver(contactSchema)
+    resolver: zodResolver(contactSchema),
+    defaultValues: { category: 'general' }
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = async () => {
     setIsSubmitting(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      toast.success('Your message has been sent ✅ We will get back to you within 24 hours');
-      setIsSuccess(true);
+      await new Promise((resolve) => setTimeout(resolve, 800));
+      toast.success('Your message has been sent. Our team will respond within 24 hours.');
       reset();
-      
-      // Reset success state after 5 seconds
-      setTimeout(() => setIsSuccess(false), 5000);
-    } catch (error) {
+    } catch {
       toast.error('Failed to send message. Please try again.');
     } finally {
       setIsSubmitting(false);
@@ -52,194 +44,141 @@ const ContactPage = () => {
 
   return (
     <PublicLayout>
-      <div className="min-h-screen bg-slate-100 pt-20 dark:bg-surface-950">
+      <div className="min-h-screen bg-atelier-50 text-atelier-900 dark:bg-atelier-950 dark:text-atelier-100 pt-20">
         {/* Hero Section */}
-        <section className="relative overflow-hidden py-20">
-          <div className="absolute left-[-10%] top-[-15%] h-96 w-96 rounded-full bg-primary-500/20 blur-3xl animate-blob" />
-          <div className="absolute right-[-8%] bottom-[-10%] h-[28rem] w-[28rem] rounded-full bg-accent-500/20 blur-3xl animate-blob" />
-
-          <div className="mx-auto max-w-4xl px-4 text-center py-12 sm:px-6 lg:px-8 relative z-10">
-            <h1 className="text-4xl font-extrabold text-white sm:text-5xl">
-              <span className="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">
-                Get in Touch
-              </span>
+        <section className="py-16 text-center border-b border-atelier-200/80 dark:border-atelier-850">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6 space-y-3">
+            <span className="text-xs font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-400">
+              Studio Support
+            </span>
+            <h1 className="font-editorial text-4xl sm:text-5xl font-bold tracking-tight text-atelier-900 dark:text-white">
+              Get in Touch
             </h1>
-            <p className="mt-6 text-lg text-slate-700 dark:text-slate-300">
-              We would love to hear from you, whether you have a question about features, pricing, or anything else our team is ready to answer
+            <p className="text-sm text-atelier-600 dark:text-atelier-400 leading-relaxed">
+              Have questions about setting up your studio, scheduling workflows, or integrations? We're here to assist.
             </p>
           </div>
         </section>
 
         {/* Content Section */}
-        <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-2">
+        <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+          <div className="grid gap-10 lg:grid-cols-[1fr_1.3fr]">
             {/* Info Cards */}
-            <div className="space-y-6">
-              {/* Email Card */}
-              <Card className="border border-slate-200 bg-white shadow-sm dark:border-white/10 dark:bg-white/5">
-                <div className="flex items-start gap-4 p-6">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 text-white flex-shrink-0">
-                    <Mail className="h-6 w-6" />
+            <div className="space-y-4">
+              <Card className="p-6">
+                <div className="flex items-start gap-3.5">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-atelier-100 text-atelier-800 dark:bg-atelier-800 dark:text-atelier-200">
+                    <Mail className="h-4 w-4 text-primary-500" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Email Us</h3>
-                    <p className="mt-2 text-slate-700 dark:text-slate-300">support@zenbooking.app</p>
-                    <p className="text-sm text-slate-500 dark:text-slate-400">We reply within 24 hours</p>
+                    <h3 className="font-editorial text-base font-bold text-atelier-900 dark:text-white">Email Us</h3>
+                    <p className="text-xs text-atelier-600 dark:text-atelier-300 mt-0.5">support@bookai.studio</p>
+                    <p className="text-[11px] text-atelier-400 mt-1">Direct support within 24 hours</p>
                   </div>
                 </div>
               </Card>
 
-              {/* Chat Card */}
-              <Card className="border border-slate-200 bg-white shadow-sm dark:border-white/10 dark:bg-white/5">
-                <div className="flex items-start gap-4 p-6">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 text-white flex-shrink-0">
-                    <MessageCircle className="h-6 w-6" />
+              <Card className="p-6">
+                <div className="flex items-start gap-3.5">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-atelier-100 text-atelier-800 dark:bg-atelier-800 dark:text-atelier-200">
+                    <MessageCircle className="h-4 w-4 text-primary-500" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Live Chat</h3>
-                    <p className="mt-2 text-slate-700 dark:text-slate-300">Use the chat widget on any booking page</p>
-                    <p className="text-sm text-slate-500 dark:text-slate-400">Available 24/7</p>
+                    <h3 className="font-editorial text-base font-bold text-atelier-900 dark:text-white">Studio Concierge</h3>
+                    <p className="text-xs text-atelier-600 dark:text-atelier-300 mt-0.5">Available on all live public booking pages</p>
+                    <p className="text-[11px] text-atelier-400 mt-1">Real-time availability answers</p>
                   </div>
                 </div>
               </Card>
 
-              {/* Location Card */}
-              <Card className="border border-slate-200 bg-white shadow-sm dark:border-white/10 dark:bg-white/5">
-                <div className="flex items-start gap-4 p-6">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 text-white flex-shrink-0">
-                    <MapPin className="h-6 w-6" />
+              <Card className="p-6">
+                <div className="flex items-start gap-3.5">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-atelier-100 text-atelier-800 dark:bg-atelier-800 dark:text-atelier-200">
+                    <MapPin className="h-4 w-4 text-primary-500" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Based In</h3>
-                    <p className="mt-2 text-slate-700 dark:text-slate-300">India</p>
-                    <p className="text-sm text-slate-500 dark:text-slate-400">Serving businesses worldwide</p>
+                    <h3 className="font-editorial text-base font-bold text-atelier-900 dark:text-white">Worldwide Support</h3>
+                    <p className="text-xs text-atelier-600 dark:text-atelier-300 mt-0.5">Serving boutique studios and clinics globally</p>
                   </div>
                 </div>
               </Card>
             </div>
 
             {/* Contact Form */}
-            <Card className="border border-slate-200 bg-white p-8 shadow-sm dark:border-white/10 dark:bg-white/5">
-              <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Send us a message</h2>
+            <Card className="p-8">
+              <h2 className="font-editorial text-xl font-bold text-atelier-900 dark:text-white">
+                Send a Message
+              </h2>
+              <p className="mt-1 text-xs text-atelier-500">
+                Fill in the details below and an atelier specialist will follow up with you.
+              </p>
 
-              {isSuccess ? (
-                <div className="flex flex-col items-center justify-center py-12">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="mb-4"
-                  >
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600">
-                      <motion.svg
-                        className="h-8 w-8 text-white"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 0.5 }}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </motion.svg>
-                    </div>
-                  </motion.div>
-                  <p className="text-center text-slate-900 dark:text-white font-semibold">Message sent successfully</p>
-                  <p className="mt-2 text-center text-slate-500 dark:text-slate-400">We will get back to you soon</p>
+              <form className="mt-6 space-y-4" onSubmit={handleSubmit(onSubmit)}>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Input
+                    label="Your Name *"
+                    placeholder="Jane Doe"
+                    {...register('fullName')}
+                    error={errors.fullName?.message}
+                  />
+
+                  <Input
+                    label="Email Address *"
+                    type="email"
+                    placeholder="jane@example.com"
+                    {...register('email')}
+                    error={errors.email?.message}
+                  />
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                  <div>
-                    <Input
-                      label="Full Name"
-                      placeholder="Your name"
-                      {...register('fullName')}
-                      error={errors.fullName?.message}
-                    />
-                  </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Input
+                    label="Subject *"
+                    placeholder="How do I set up recurring slots?"
+                    {...register('subject')}
+                    error={errors.subject?.message}
+                  />
 
                   <div>
-                    <Input
-                      label="Email Address"
-                      type="email"
-                      placeholder="your@email.com"
-                      {...register('email')}
-                      error={errors.email?.message}
-                    />
-                  </div>
-
-                  <div>
-                    <Input
-                      label="Subject"
-                      placeholder="What is this about?"
-                      {...register('subject')}
-                      error={errors.subject?.message}
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Category</label>
+                    <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-atelier-600 dark:text-atelier-400">
+                      Topic Category
+                    </label>
                     <select
                       {...register('category')}
-                      className={cn(
-                        'w-full rounded-xl border px-4 py-3 bg-white text-slate-900 placeholder:text-slate-400',
-                        'border-slate-300 transition-colors duration-200',
-                        'focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20',
-                        'dark:bg-white/5 dark:border-white/10 dark:text-white dark:placeholder:text-slate-500',
-                        errors.category && 'border-red-500/50'
-                      )}
+                      className="w-full rounded-xl border border-atelier-200 bg-white px-3.5 py-2.5 text-xs text-atelier-900 focus:border-primary-500 focus:outline-none dark:border-atelier-700 dark:bg-atelier-800 dark:text-white"
                     >
-                      <option value="">Select a category</option>
                       <option value="general">General Inquiry</option>
                       <option value="technical">Technical Support</option>
-                      <option value="billing">Billing Question</option>
+                      <option value="billing">Pricing & Plans</option>
                       <option value="feature">Feature Request</option>
-                      <option value="bug">Bug Report</option>
+                      <option value="bug">Report an Issue</option>
                     </select>
-                    {errors.category && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.category.message}</p>}
                   </div>
+                </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Message</label>
-                    <textarea
-                      rows={4}
-                      placeholder="Tell us more..."
-                      {...register('message')}
-                      className={cn(
-                        'w-full rounded-xl border px-4 py-3 bg-white text-slate-900 placeholder:text-slate-400',
-                        'border-slate-300 transition-colors duration-200',
-                        'focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20',
-                        'dark:bg-white/5 dark:border-white/10 dark:text-white dark:placeholder:text-slate-500',
-                        'resize-none',
-                        errors.message && 'border-red-500/50'
-                      )}
-                    />
-                    {errors.message && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.message.message}</p>}
-                  </div>
+                <div>
+                  <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-atelier-600 dark:text-atelier-400">
+                    Message *
+                  </label>
+                  <textarea
+                    rows={4}
+                    {...register('message')}
+                    placeholder="Provide details about your question or inquiry..."
+                    className="w-full rounded-xl border border-atelier-200 bg-white p-3.5 text-xs text-atelier-900 focus:border-primary-500 focus:outline-none dark:border-atelier-700 dark:bg-atelier-800 dark:text-white leading-relaxed"
+                  />
+                  {errors.message?.message && (
+                    <p className="mt-1 text-xs text-red-500">{errors.message.message}</p>
+                  )}
+                </div>
 
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <Spinner className="h-4 w-4" />
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="h-4 w-4" />
-                        Send Message
-                      </>
-                    )}
-                  </Button>
-                </form>
-              )}
+                <Button
+                  type="submit"
+                  loading={isSubmitting}
+                  className="w-full sm:w-auto text-xs font-semibold gap-2"
+                >
+                  <Send className="h-3.5 w-3.5" /> Send Message
+                </Button>
+              </form>
             </Card>
           </div>
         </section>
