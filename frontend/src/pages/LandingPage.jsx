@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { Button, Card } from '../components/ui/index.js';
 import { Footer } from '../components/layout/Footer.jsx';
+import ThemeToggle from '../components/layout/ThemeToggle.jsx';
 import { routes } from '../constants/routes.js';
 
 const features = [
@@ -95,7 +96,8 @@ const LandingPage = () => {
             <a href="#how-it-works" className="hover:text-atelier-900 dark:hover:text-white transition-colors">How It Works</a>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
+            <ThemeToggle />
             <Link
               to={routes.login}
               className="inline-flex h-9 items-center justify-center rounded-xl px-3.5 text-xs font-medium text-atelier-700 hover:text-atelier-900 dark:text-atelier-300 dark:hover:text-white transition-colors"

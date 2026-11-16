@@ -8,6 +8,7 @@ import { toast } from 'sonner';
 import { z } from 'zod';
 import { loginOwner, getMe } from '../../api/auth.api.js';
 import { Button, Card, Input } from '../../components/ui/index.js';
+import ThemeToggle from '../../components/layout/ThemeToggle.jsx';
 import { ROUTES } from '../../constants/routes.js';
 import { useAuthStore } from '../../store/authStore.js';
 
@@ -51,7 +52,10 @@ const LoginPage = () => {
   });
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-atelier-50 px-4 py-12 dark:bg-atelier-950">
+    <div className="relative flex min-h-screen items-center justify-center bg-atelier-50 px-4 py-12 dark:bg-atelier-950">
+      <div className="fixed top-5 right-5 z-20">
+        <ThemeToggle />
+      </div>
       <Card className="w-full max-w-md border border-atelier-200 bg-white p-8 shadow-card dark:border-atelier-800 dark:bg-atelier-900">
         <div className="mb-8 text-center space-y-2">
           <Link to="/" className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-atelier-900 font-editorial text-xl font-bold text-white dark:bg-white dark:text-atelier-950 mb-2">

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Sun, Moon } from 'lucide-react';
 import { useThemeStore } from '../../store/themeStore.js';
+import { cn } from '../../utils/cn.js';
 
 const ThemeToggle = ({ className = '' }) => {
   const { theme, toggleTheme } = useThemeStore((state) => ({ theme: state.theme, toggleTheme: state.toggleTheme }));
@@ -17,10 +18,14 @@ const ThemeToggle = ({ className = '' }) => {
   return (
     <button
       onClick={toggleTheme}
-      aria-label="Toggle theme"
-      className={`inline-flex items-center justify-center rounded-md p-2 bg-slate-200 border border-slate-300 text-slate-700 hover:bg-slate-300 transition-colors dark:bg-white/10 dark:border-white/20 dark:text-white dark:hover:bg-white/20 ${className}`}
+      type="button"
+      aria-label="Toggle light or dark theme"
+      className={cn(
+        'inline-flex h-9 w-9 items-center justify-center rounded-xl border border-atelier-200 bg-atelier-50 text-atelier-700 transition-all hover:bg-atelier-100 hover:text-atelier-900 active:scale-95 dark:border-atelier-700 dark:bg-atelier-800 dark:text-atelier-200 dark:hover:bg-atelier-700 dark:hover:text-white',
+        className
+      )}
     >
-      {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+      {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
     </button>
   );
 };
