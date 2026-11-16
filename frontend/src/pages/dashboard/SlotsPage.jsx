@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Calendar, Clock, Plus, Trash2, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Clock, Plus, Trash2, CheckCircle2 } from 'lucide-react';
 import { getHolidays, getSlots, addHoliday, deleteHoliday, saveSlot } from '../../api/slot.api.js';
 import { Button, Card, Input, Skeleton } from '../../components/ui/index.js';
 import { formatDate } from '../../utils/dateUtils.js';
@@ -77,16 +77,16 @@ const SlotsPage = () => {
       {/* Header */}
       <div>
         <span className="text-xs font-semibold uppercase tracking-wider text-atelier-500">Operating Hours</span>
-        <h1 className="font-editorial text-2xl font-bold text-atelier-900 dark:text-white">
-          Studio Schedule & Blackout Dates
+        <h1 className="font-editorial text-2xl sm:text-3xl font-bold text-atelier-900 dark:text-white">
+          Schedule & Blackout Dates
         </h1>
-        <p className="mt-1 text-xs text-atelier-500">
-          Configure your working hours by day of the week and block studio vacations or holidays.
+        <p className="mt-1 text-xs sm:text-sm text-atelier-500">
+          Set your working hours for each day of the week and block holidays or vacations.
         </p>
       </div>
 
       {/* Weekly Schedule Card */}
-      <Card className="p-6">
+      <Card className="p-5 sm:p-6">
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between border-b border-atelier-100 pb-4 dark:border-atelier-800">
           <div className="flex items-center gap-2">
             <Clock className="h-4 w-4 text-primary-500" />
@@ -110,68 +110,71 @@ const SlotsPage = () => {
               return (
                 <div
                   key={day}
-                  className={`grid items-center gap-3 rounded-xl border p-3.5 transition-all md:grid-cols-[140px_1fr_1fr_130px_36px] ${
+                  className={`flex flex-col md:flex-row md:items-center justify-between gap-3 rounded-xl border p-3.5 transition-all ${
                     row.isActive
                       ? 'border-atelier-200 bg-white dark:border-atelier-800 dark:bg-atelier-850'
                       : 'border-atelier-100 bg-atelier-50/50 opacity-60 dark:border-atelier-850 dark:bg-atelier-900/50'
                   }`}
                 >
                   {/* Day Toggle Switch */}
-                  <label className="flex cursor-pointer items-center gap-3">
+                  <div className="flex items-center gap-3 w-40 shrink-0">
                     <button
                       type="button"
                       role="switch"
                       aria-checked={row.isActive}
                       onClick={() => setRows((c) => ({ ...c, [day]: { ...c[day], isActive: !c[day].isActive } }))}
-                      className={`relative h-5 w-10 rounded-full transition-colors ${row.isActive ? 'bg-primary-500' : 'bg-atelier-300 dark:bg-atelier-700'}`}
+                      className={`relative h-5 w-10 shrink-0 rounded-full transition-colors ${row.isActive ? 'bg-primary-500' : 'bg-atelier-300 dark:bg-atelier-700'}`}
                     >
                       <span className={`absolute top-0.5 left-0.5 h-4 w-4 rounded-full bg-white shadow-sm transition-transform ${row.isActive ? 'translate-x-5' : 'translate-x-0'}`} />
                     </button>
                     <span className="text-xs font-semibold text-atelier-900 dark:text-white">{day}</span>
-                  </label>
-
-                  {/* Start Time */}
-                  <div>
-                    <label className="mb-1 block text-[10px] font-semibold uppercase tracking-wider text-atelier-500">Open Time</label>
-                    <input
-                      type="time"
-                      value={row.startTime}
-                      disabled={!row.isActive}
-                      onChange={(e) => setRows((c) => ({ ...c, [day]: { ...c[day], startTime: e.target.value } }))}
-                      className="h-9 w-full rounded-lg border border-atelier-200 bg-atelier-50 px-2.5 text-xs text-atelier-900 focus:border-primary-500 focus:outline-none dark:border-atelier-700 dark:bg-atelier-800 dark:text-white disabled:opacity-40"
-                    />
                   </div>
 
-                  {/* End Time */}
-                  <div>
-                    <label className="mb-1 block text-[10px] font-semibold uppercase tracking-wider text-atelier-500">Close Time</label>
-                    <input
-                      type="time"
-                      value={row.endTime}
-                      disabled={!row.isActive}
-                      onChange={(e) => setRows((c) => ({ ...c, [day]: { ...c[day], endTime: e.target.value } }))}
-                      className="h-9 w-full rounded-lg border border-atelier-200 bg-atelier-50 px-2.5 text-xs text-atelier-900 focus:border-primary-500 focus:outline-none dark:border-atelier-700 dark:bg-atelier-800 dark:text-white disabled:opacity-40"
-                    />
-                  </div>
+                  {/* Time and Duration Controls */}
+                  <div className="flex flex-wrap items-center gap-3 md:gap-4 flex-1 md:justify-end">
+                    {/* Start Time */}
+                    <div className="flex items-center gap-2">
+                      <span className="text-[11px] font-medium text-atelier-500 shrink-0">From</span>
+                      <input
+                        type="time"
+                        value={row.startTime}
+                        disabled={!row.isActive}
+                        onChange={(e) => setRows((c) => ({ ...c, [day]: { ...c[day], startTime: e.target.value } }))}
+                        className="h-9 w-28 rounded-lg border border-atelier-200 bg-atelier-50 px-2 text-xs text-atelier-900 focus:border-primary-500 focus:outline-none dark:border-atelier-700 dark:bg-atelier-800 dark:text-white disabled:opacity-40"
+                      />
+                    </div>
 
-                  {/* Slot Duration */}
-                  <div>
-                    <label className="mb-1 block text-[10px] font-semibold uppercase tracking-wider text-atelier-500">Duration</label>
-                    <select
-                      value={row.durationMinutes}
-                      disabled={!row.isActive}
-                      onChange={(e) => setRows((c) => ({ ...c, [day]: { ...c[day], durationMinutes: Number(e.target.value) } }))}
-                      className="h-9 w-full rounded-lg border border-atelier-200 bg-atelier-50 px-2 text-xs text-atelier-900 focus:border-primary-500 focus:outline-none dark:border-atelier-700 dark:bg-atelier-800 dark:text-white disabled:opacity-40"
-                    >
-                      {[15, 20, 30, 45, 60, 90, 120].map((d) => (
-                        <option key={d} value={d}>{d} mins</option>
-                      ))}
-                    </select>
-                  </div>
+                    {/* End Time */}
+                    <div className="flex items-center gap-2">
+                      <span className="text-[11px] font-medium text-atelier-500 shrink-0">To</span>
+                      <input
+                        type="time"
+                        value={row.endTime}
+                        disabled={!row.isActive}
+                        onChange={(e) => setRows((c) => ({ ...c, [day]: { ...c[day], endTime: e.target.value } }))}
+                        className="h-9 w-28 rounded-lg border border-atelier-200 bg-atelier-50 px-2 text-xs text-atelier-900 focus:border-primary-500 focus:outline-none dark:border-atelier-700 dark:bg-atelier-800 dark:text-white disabled:opacity-40"
+                      />
+                    </div>
 
-                  {/* Active Indicator */}
-                  <div className="flex items-center justify-center">
-                    <span className={`h-2 w-2 rounded-full ${row.isActive ? 'bg-accent-600' : 'bg-atelier-300 dark:bg-atelier-700'}`} />
+                    {/* Slot Duration */}
+                    <div className="flex items-center gap-2">
+                      <span className="text-[11px] font-medium text-atelier-500 shrink-0">Every</span>
+                      <select
+                        value={row.durationMinutes}
+                        disabled={!row.isActive}
+                        onChange={(e) => setRows((c) => ({ ...c, [day]: { ...c[day], durationMinutes: Number(e.target.value) } }))}
+                        className="h-9 w-24 rounded-lg border border-atelier-200 bg-atelier-50 px-2 text-xs text-atelier-900 focus:border-primary-500 focus:outline-none dark:border-atelier-700 dark:bg-atelier-800 dark:text-white disabled:opacity-40"
+                      >
+                        {[15, 20, 30, 45, 60, 90, 120].map((d) => (
+                          <option key={d} value={d}>{d} mins</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* Active Status Dot */}
+                    <div className="hidden sm:flex items-center pl-1">
+                      <span className={`h-2 w-2 rounded-full ${row.isActive ? 'bg-accent-600' : 'bg-atelier-300 dark:bg-atelier-700'}`} />
+                    </div>
                   </div>
                 </div>
               );
@@ -183,7 +186,7 @@ const SlotsPage = () => {
           <Button
             loading={saveMutation.isPending}
             onClick={() => saveMutation.mutate()}
-            className="text-xs font-semibold"
+            className="text-xs font-semibold px-6"
           >
             Save Weekly Schedule
           </Button>
@@ -191,7 +194,7 @@ const SlotsPage = () => {
       </Card>
 
       {/* Blackout / Holiday Dates Card */}
-      <Card className="p-6">
+      <Card className="p-5 sm:p-6">
         <div className="mb-4">
           <h2 className="font-editorial text-lg font-bold text-atelier-900 dark:text-white">
             Studio Blackout Dates & Holidays

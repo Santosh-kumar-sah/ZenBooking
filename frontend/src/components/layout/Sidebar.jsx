@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Calendar, Clock, Sparkles, Settings, ChevronLeft, LogOut, ExternalLink } from 'lucide-react';
+import { LayoutDashboard, Calendar, Clock, Sparkles, Settings, ChevronLeft, LogOut, ExternalLink, X } from 'lucide-react';
 import { cn } from '../../utils/cn.js';
 import { routes } from '../../constants/routes.js';
 import { Button } from '../ui/Button.jsx';
@@ -13,7 +13,7 @@ const items = [
   { to: routes.settings, label: 'Settings', icon: Settings }
 ];
 
-const Sidebar = ({ isCollapsed, onToggle }) => {
+const Sidebar = ({ isCollapsed = false, onToggle, className = '' }) => {
   const navigate = useNavigate();
   const owner = useAuthStore((state) => state.owner);
   const logout = useAuthStore((state) => state.logout);
@@ -28,13 +28,14 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
   return (
     <aside
       className={cn(
-        'fixed inset-y-0 left-0 z-40 flex h-full flex-col border-r border-atelier-200 bg-white px-3 py-5 shadow-sm transition-all duration-300 dark:border-atelier-800 dark:bg-atelier-900',
-        isCollapsed ? 'w-20' : 'w-68'
+        'flex flex-col border-r border-atelier-200 bg-white px-3 py-5 transition-all duration-300 dark:border-atelier-800 dark:bg-atelier-900 select-none',
+        isCollapsed ? 'w-20' : 'w-64',
+        className
       )}
     >
-      {/* Brand header */}
+      {/* Brand Header */}
       <div className="mb-6 flex items-center justify-between px-2">
-        <div className={cn('flex items-center gap-2.5', isCollapsed && 'justify-center w-full')}>
+        <div className={cn('flex items-center gap-2.5 min-w-0', isCollapsed && 'justify-center w-full')}>
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-atelier-900 font-editorial text-base font-bold text-white dark:bg-white dark:text-atelier-950">
             B
           </div>
@@ -49,6 +50,8 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
             </div>
           )}
         </div>
+
+        {/* Desktop Collapse Toggle */}
         <Button
           variant="ghost"
           size="sm"
@@ -58,9 +61,20 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
         >
           <ChevronLeft className="h-4 w-4" />
         </Button>
+
+        {/* Mobile Close Button */}
+        <Button
+          variant="ghost"
+          size="sm"
+          className="lg:hidden h-8 w-8 p-0 text-atelier-400 hover:text-atelier-800"
+          onClick={onToggle}
+          aria-label="Close sidebar"
+        >
+          <X className="h-4 w-4" />
+        </Button>
       </div>
 
-      {/* Navigation links */}
+      {/* Navigation Links */}
       <nav className="flex-1 space-y-1">
         {items.map(({ to, label, icon: Icon }) => (
           <NavLink
@@ -68,7 +82,7 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
             to={to}
             className={({ isActive }) =>
               cn(
-                'flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-xs font-medium transition-all duration-200 select-none',
+                'flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-xs font-medium transition-all duration-200',
                 isActive
                   ? 'bg-primary-50 text-primary-800 font-semibold dark:bg-primary-950/50 dark:text-primary-300'
                   : 'text-atelier-600 hover:bg-atelier-100/70 hover:text-atelier-900 dark:text-atelier-400 dark:hover:bg-atelier-800 dark:hover:text-white',
@@ -83,7 +97,7 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
         ))}
       </nav>
 
-      {/* View Public Page Link */}
+      {/* Public Booking Page Link */}
       {owner?._id && !isCollapsed && (
         <div className="mb-3 px-1">
           <a
@@ -98,7 +112,7 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
         </div>
       )}
 
-      {/* Footer Profile & Logout */}
+      {/* Profile & Logout Footer */}
       <div className="border-t border-atelier-100 pt-3 dark:border-atelier-800">
         <div className={cn('flex items-center justify-between px-2', isCollapsed && 'justify-center')}>
           {!isCollapsed && (
