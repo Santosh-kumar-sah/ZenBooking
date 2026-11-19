@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![ZenBooking Banner](https://github.com/user-attachments/assets/12b2d408-bb1f-42cb-b9da-8688c2714b73)
+
 
 ### **AI-Powered Appointment Booking & Scheduling Platform for Salons & Service Businesses**
 
