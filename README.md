@@ -498,9 +498,7 @@ Contributions make the open-source community an incredible place to learn, inspi
 
 ---
 
-## 📄 License
 
-Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for more information.
 
 ---
 
